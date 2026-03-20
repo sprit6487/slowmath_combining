@@ -183,11 +183,11 @@
   .tri-bottom-section { display: flex; flex-direction: column; align-items: center; }
   .tri-arrows { display: flex; justify-content: center; margin: 4px 0; }
   .tri-box {
-    width: 64px; height: 64px; border: 2.5px solid var(--warm-300); border-radius: 12px;
+    width: 72px; height: 72px; border: 2.5px solid var(--warm-300); border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.75rem; font-weight: 900; color: var(--warm-800); background: #fff; position: relative;
+    font-size: 2rem; font-weight: 900; color: var(--warm-800); background: #fff; position: relative;
   }
-  .tri-box.top { width: 72px; height: 72px; font-size: 2rem; border-color: var(--app-blue); background: var(--app-blue-soft); }
+  .tri-box.top { border-color: var(--app-blue); background: var(--app-blue-soft); }
   .tri-box.blank { border-style: dashed; border-color: var(--app-orange); background: var(--app-orange-soft); color: var(--app-orange); font-size: 1.5rem; }
   .tri-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); color: var(--app-green); animation: popIn 0.35s ease; }
   .tri-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); color: var(--app-red); animation: shake 0.4s ease; }
@@ -202,27 +202,27 @@
 
   /* ===== Circle Combine Mode ===== */
   .circle-box {
-    width: 120px; height: 120px; border: 2.5px solid var(--warm-300); border-radius: 50%;
-    display: grid; grid-template-columns: repeat(3, 19px);
-    gap: 5px; padding: 14px; background: #fff; position: relative;
+    width: 148px; height: 148px; border: 2.5px solid var(--warm-300); border-radius: 50%;
+    display: grid; grid-template-columns: repeat(3, 26px);
+    gap: 6px; padding: 18px; background: #fff; position: relative;
     align-content: center; justify-content: center;
   }
-  .circle-box.top { width: 120px; height: 120px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 14px; display: flex; align-items: center; justify-content: center; }
+  .circle-box.top { width: 148px; height: 148px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 18px; display: flex; align-items: center; justify-content: center; }
   .circle-box.blank { border-style: dashed; border-color: var(--warm-300); background: var(--warm-50); }
   .circle-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
   .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
   .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
-  .cdot { width: 19px; height: 19px; border-radius: 50%; flex-shrink: 0; }
+  .cdot { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
   .cdot.orange { background: var(--app-orange); }
   .cdot.green { background: var(--app-green); }
   .cdot.blue { background: #7EC8E3; }
-  .circle-box.top .cdot { width: 20px; height: 20px; }
+  .circle-box.top .cdot { width: 27px; height: 27px; }
 
   /* Choices */
   .choices-grid {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px; width: 100%; max-width: 280px; margin-top: 16px; position: relative;
+    gap: 12px; width: 100%; margin-top: 16px; position: relative;
   }
   .choice-btn {
     padding: 16px; border: 2.5px solid var(--border); border-radius: 16px;
@@ -246,7 +246,7 @@
   .circle-choice-btn.correct { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; }
   .circle-choice-btn.wrong { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
   .circle-choice-btn:disabled { pointer-events: none; opacity: 0.4; }
-  .circle-choice-btn .cdot { width: 14px; height: 14px; }
+  .circle-choice-btn .cdot { width: 22px; height: 22px; }
   .choices-grid.chips-hidden .circle-choice-btn { visibility: hidden; }
   .choices-grid.chips-locked .circle-choice-btn { pointer-events: none; opacity: 0.4; }
 
@@ -319,8 +319,8 @@
     .mode-card h2 { font-size: 0.95rem; }
     .mode-btns { gap: 4px; grid-template-columns: 1fr 1fr; }
     .start-btn { padding: 7px 4px; }
-    .tri-box { width: 52px; height: 52px; font-size: 1.4rem; border-radius: 10px; }
-    .tri-box.top { width: 58px; height: 58px; font-size: 1.6rem; }
+    .tri-box { width: 58px; height: 58px; font-size: 1.6rem; border-radius: 10px; }
+    .tri-box.top { }
     .tri-box.blank { font-size: 1.2rem; }
     .tri-arrows svg { width: 130px; }
     .tri-bottom { gap: 20px; }
@@ -329,12 +329,12 @@
     .hint-dot { width: 10px; height: 10px; }
     .choice-btn { padding: 12px; font-size: 1.4rem; border-radius: 12px; }
     .choices-grid { gap: 8px; max-width: 240px; }
-    .circle-box { width: 96px; height: 96px; padding: 12px; grid-template-columns: repeat(3, 16px); }
-    .circle-box.top { width: 96px; height: 96px; padding: 12px; }
-    .cdot { width: 16px; height: 16px; }
-    .circle-box.top .cdot { width: 17px; height: 17px; }
+    .circle-box { width: 130px; height: 130px; padding: 14px; grid-template-columns: repeat(3, 22px); gap: 5px; }
+    .circle-box.top { width: 130px; height: 130px; padding: 14px; }
+    .cdot { width: 22px; height: 22px; }
+    .circle-box.top .cdot { width: 23px; height: 23px; }
     .circle-choice-btn { padding: 8px; min-height: 46px; }
-    .circle-choice-btn .cdot { width: 12px; height: 12px; }
+    .circle-choice-btn .cdot { width: 18px; height: 18px; }
     .drag-circle-box { width: 130px; height: 130px; grid-template-columns: repeat(3, 28px); gap: 5px; padding: 14px; }
     .drag-circle-box .cdot { width: 22px !important; height: 22px !important; justify-self: center; align-self: center; }
     .drag-sources-row { gap: 16px; }
@@ -352,18 +352,18 @@
     .login-view { min-height: auto; padding: 60px 40px; }
     .brand h1, .login-logo-area h1 { font-size: 2.1rem; }
     .mode-card { padding: 24px 22px; }
-    .tri-box { width: 76px; height: 76px; font-size: 2.1rem; }
-    .tri-box.top { width: 84px; height: 84px; font-size: 2.4rem; }
+    .tri-box { width: 84px; height: 84px; font-size: 2.4rem; }
+    .tri-box.top { }
     .tri-bottom { gap: 48px; }
     .hint-dot { width: 14px; height: 14px; }
     .hint-dots { gap: 5px; }
     .choice-btn { padding: 20px; font-size: 2.1rem; }
     .choices-grid { max-width: 320px; gap: 14px; }
-    .circle-box { width: 140px; height: 140px; padding: 18px; grid-template-columns: repeat(3, 22px); }
-    .circle-box.top { width: 140px; height: 140px; padding: 18px; }
+    .circle-box { width: 180px; height: 180px; padding: 22px; grid-template-columns: repeat(3, 32px); gap: 7px; }
+    .circle-box.top { width: 180px; height: 180px; padding: 22px; }
     .cdot { width: 22px; height: 22px; }
-    .circle-box.top .cdot { width: 23px; height: 23px; }
-    .circle-choice-btn .cdot { width: 16px; height: 16px; }
+    .circle-box.top .cdot { width: 33px; height: 33px; }
+    .circle-choice-btn .cdot { width: 26px; height: 26px; }
     .drag-circle-box { width: 180px; height: 180px; grid-template-columns: repeat(3, 40px); gap: 7px; padding: 22px; }
     .drag-circle-box .cdot { width: 32px !important; height: 32px !important; justify-self: center; align-self: center; }
     .drag-sources-row { gap: 36px; }
@@ -1200,7 +1200,7 @@ function renderNumCombineQuestion() {
 
   const gc = document.getElementById('game-container');
   gc.innerHTML = `
-    <div class="question-label">${q.left} + ${q.right} 를 모으면 몇이 될까요?</div>
+    <div class="question-label">모으면 몇이 될까요?</div>
     <div class="triangle-wrap">
       <div class="tri-bottom">
         <div class="tri-bottom-section">
@@ -1274,7 +1274,7 @@ function renderNumCombineCircleQuestion() {
 
   const gc = document.getElementById('game-container');
   gc.innerHTML = `
-    <div class="question-label">동그라미를 모으면 몇 개가 될까요?</div>
+    <div class="question-label">모으면 몇이 될까요?</div>
     <div class="triangle-wrap">
       <div class="tri-bottom">
         <div class="tri-bottom-section">
@@ -1340,7 +1340,7 @@ function renderCircleCombineQuestion() {
 
   const gc = document.getElementById('game-container');
   gc.innerHTML = `
-    <div class="question-label">동그라미를 모으면 몇 개가 될까요?</div>
+    <div class="question-label">모으면 몇이 될까요?</div>
     <div class="triangle-wrap">
       <div class="tri-bottom">
         <div class="tri-bottom-section">

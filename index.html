@@ -251,20 +251,20 @@
 
   /* ===== Drag Combine Mode ===== */
   .drag-game-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 8px 0 14px; }
-  .drag-sources-row { display: flex; gap: 12px; justify-content: center; }
-  .drag-src-box { display: grid; grid-template-columns: repeat(5, 28px); gap: 6px; padding: 8px 10px; border: 2px solid; border-radius: 12px; justify-items: start; align-content: start; }
+  .drag-sources-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .drag-src-box { display: grid; grid-template-columns: repeat(5, 22px); gap: 5px; padding: 7px 9px; border: 2px solid; border-radius: 12px; justify-items: start; align-content: start; }
   .drag-src-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .drag-src-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
-  .drag-item { width: 28px; height: 28px; border-radius: 50%; cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
+  .drag-item { width: 22px; height: 22px; border-radius: 50%; cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
   .drag-item.orange { background: var(--app-orange); }
   .drag-item.green { background: var(--app-green); }
   .drag-item.drag-item-held { opacity: 0.2; }
   .drag-item-ghost { position: fixed; pointer-events: none; z-index: 9999; border-radius: 50%; opacity: 0.85; }
   .drag-item-ghost.orange { background: var(--app-orange); }
   .drag-item-ghost.green { background: var(--app-green); }
-  .drag-tray { width: 212px; min-height: 64px; border: 2.5px dashed #6BADE8; border-radius: 16px; background: #EEF6FD; display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; justify-content: flex-start; align-content: flex-start; align-items: flex-start; position: relative; }
+  .drag-tray { width: 166px; min-height: 64px; border: 2.5px dashed #6BADE8; border-radius: 16px; background: #EEF6FD; display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; justify-content: flex-start; align-content: flex-start; align-items: flex-start; position: relative; }
   .drag-hint-txt { font-size: 0.8rem; color: #6BADE8; font-weight: 600; pointer-events: none; width: 100%; text-align: center; }
-  .tray-dot { width: 28px; height: 28px; border-radius: 50%; animation: popIn 0.2s ease; flex-shrink: 0; }
+  .tray-dot { width: 22px; height: 22px; border-radius: 50%; animation: popIn 0.2s ease; flex-shrink: 0; }
   .tray-dot.blue { background: #6BADE8; }
 
   /* Reveal button */

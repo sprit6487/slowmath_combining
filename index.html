@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>느린아이 모으기 연습</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm-50: #FDFCFA; --warm-100: #FAF7F2; --warm-200: #F3EDE4;
+    --warm-300: #E0D5C5; --warm-400: #B8AD9E; --warm-500: #8C7E6A;
+    --warm-600: #6B5F50; --warm-700: #4A4035; --warm-800: #2E261D;
+    --border: #E8E2DA; --border-light: #F0ECE6;
+    --app-blue: #6BADE8; --app-blue-light: #D9EDFC; --app-blue-soft: #EEF6FD;
+    --app-orange: #F0A050; --app-orange-light: #FDE8C8; --app-orange-soft: #FFF6EB;
+    --app-green: #5BC886; --app-green-light: #D4F5E0;
+    --app-red: #F07070; --app-red-light: #FDE8E8;
+    --bg: #F5F1EB;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; justify-content: center; align-items: flex-start;
+    color: var(--warm-700);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .hidden { display: none !important; }
+
+  .app {
+    width: 100%; max-width: 480px;
+    min-height: 100dvh;
+    background: #fff;
+    padding: 24px 20px;
+    padding-top: max(24px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+    display: flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+
+  /* ===== Login View ===== */
+  .login-view {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    flex: 1; min-height: 100dvh;
+    padding: 40px 20px; width: 100%;
+  }
+  .login-logo-area { text-align: center; margin-bottom: 48px; }
+  .login-logo-area .turtle-svg { display: inline-block; margin-bottom: 12px; }
+  .login-logo-area h1 { font-size: 1.875rem; font-weight: 900; letter-spacing: -0.025em; margin-top: 8px; }
+  .login-subtitle { color: var(--warm-400); font-size: 0.9375rem; margin-top: 4px; }
+  .login-buttons { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 12px; }
+  .login-btn {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; width: 100%; padding: 14px 20px;
+    border-radius: 12px; border: none;
+    font-size: 0.9375rem; font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer; transition: transform 0.1s, opacity 0.15s;
+  }
+  .login-btn:active { transform: scale(0.97); }
+  .login-btn svg { flex-shrink: 0; }
+  .login-btn.kakao { background: #FEE500; color: #191919; }
+  .login-btn.naver { background: #03C75A; color: #fff; }
+  .login-btn.google { background: #fff; color: #444; border: 1.5px solid #DADCE0; }
+  .login-btn.facebook { background: #1877F2; color: #fff; }
+  .login-divider {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; max-width: 320px; margin: 16px 0 4px;
+    color: var(--warm-400); font-size: 0.8rem;
+  }
+  .login-divider::before, .login-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--warm-300);
+  }
+
+  /* ===== Start View ===== */
+  #start-view { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .brand { display: flex; flex-direction: column; align-items: center; margin-bottom: 2px; }
+  .brand .turtle-svg { display: inline-block; margin-bottom: 12px; }
+  .brand h1 { font-size: 1.875rem; font-weight: 900; letter-spacing: -0.025em; }
+  .brand-sub { font-size: 0.8rem; color: var(--warm-400); margin-bottom: 24px; font-weight: 500; }
+
+  /* Mode Cards */
+  .mode-card {
+    background: #fff; border: 2px solid var(--border);
+    border-radius: 20px; padding: 20px 18px; width: 100%;
+    margin-bottom: 12px; text-align: center;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .mode-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+  .mode-card h2 { font-size: 1.05rem; font-weight: 700; color: var(--warm-700); margin-bottom: 4px; }
+  .mode-card .desc { font-size: 0.75rem; color: var(--warm-400); margin-bottom: 14px; }
+  .mode-btns { display: flex; gap: 6px; justify-content: center; }
+  .start-btn {
+    padding: 10px 6px; border: 2px solid var(--border);
+    border-radius: 12px; background: #fff;
+    font-size: 0.8rem; font-weight: 700; color: var(--warm-600);
+    cursor: pointer; font-family: inherit; transition: all 0.12s;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    flex: 1;
+  }
+  .start-btn:hover, .start-btn:active {
+    background: var(--app-blue-soft); border-color: var(--app-blue); color: var(--app-blue);
+  }
+
+  /* Settings */
+  .settings-section { width: 100%; margin-top: 6px; }
+  .setting-divider { border-top: 1.5px solid var(--border-light); padding-top: 18px; margin-top: 18px; }
+  .setting-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .setting-title { font-size: 0.875rem; font-weight: 600; color: var(--warm-700); }
+  .setting-title .badge { font-size: 0.7rem; font-weight: 400; color: var(--warm-400); margin-left: 6px; }
+  .setting-desc { font-size: 0.75rem; color: var(--warm-400); margin-top: 2px; margin-bottom: 8px; }
+  .toggle-track {
+    width: 48px; height: 28px; border-radius: 99px; position: relative;
+    background: #E0DAD0; border: none; cursor: pointer; flex-shrink: 0; transition: background 0.2s;
+  }
+  .toggle-track.on { background: #5BC886; }
+  .toggle-knob {
+    width: 22px; height: 22px; border-radius: 50%; background: #fff;
+    position: absolute; top: 3px; left: 3px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12); transition: transform 0.2s;
+  }
+  .toggle-track.on .toggle-knob { transform: translateX(20px); }
+  .impulse-mode-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .impulse-mode-btn {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 10px 8px; border-radius: 14px; border: 2px solid var(--border);
+    background: #fff; cursor: pointer; transition: all 0.15s; font-family: inherit;
+  }
+  .impulse-mode-btn.selected { border-color: #C4AA82; background: #FAF5EE; }
+  .impulse-mode-icon { font-size: 1.2rem; margin-bottom: 2px; }
+  .impulse-mode-label { font-size: 0.8rem; font-weight: 700; color: var(--warm-700); }
+  .impulse-mode-desc { font-size: 0.65rem; color: var(--warm-400); margin-top: 1px; }
+  .delay-row { display: none; flex-wrap: wrap; gap: 4px; justify-content: center; }
+  .delay-row.show { display: flex; }
+  .imp-sec {
+    flex: 0 0 calc((100% - 16px) / 5); padding: 8px 0;
+    font-size: 0.75rem; font-weight: 600; border-radius: 10px;
+    border: 2px solid var(--border); background: #fff; color: #8C8070;
+    cursor: pointer; font-family: inherit; transition: all 0.15s; text-align: center;
+  }
+  .imp-sec.active { border-color: #C4AA82; background: #FAF5EE; color: #7B6545; }
+  .impulse-details { display: none; margin-top: 8px; }
+  .impulse-details.show { display: block; }
+  .logout-btn {
+    background: none; border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: var(--warm-400);
+    cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: background 0.15s; margin-top: 20px;
+  }
+  .logout-btn:hover { background: var(--bg); }
+
+  /* ===== Play View ===== */
+  #play-view { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .play-header { display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 12px; }
+  .back-btn {
+    width: 36px; height: 36px; border: 2px solid var(--warm-300);
+    border-radius: 10px; background: var(--warm-50);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--warm-400); cursor: pointer; font-family: inherit; flex-shrink: 0; padding: 0;
+  }
+  .play-middle { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .play-progress-label { font-size: 0.8rem; font-weight: 600; color: var(--warm-500); }
+  .play-progress-bar { width: 100%; height: 6px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+  .play-progress-fill { height: 100%; border-radius: 3px; background: var(--app-red); transition: width 0.3s ease, background 0.3s ease; }
+  .play-score { font-size: 0.85rem; font-weight: 700; color: var(--app-green); flex-shrink: 0; white-space: nowrap; }
+  .combo-badge { font-size: 0.8rem; font-weight: 700; color: var(--app-orange); min-height: 20px; }
+  .game-container {
+    background: #fff; border: 2px solid var(--border); border-radius: 20px;
+    padding: 24px 18px; width: 100%;
+    display: flex; flex-direction: column; align-items: center; position: relative;
+  }
+  .question-label { font-size: 0.85rem; color: var(--warm-400); font-weight: 500; margin-bottom: 8px; }
+
+  /* ===== Combine Triangle ===== */
+  .triangle-wrap { display: flex; flex-direction: column; align-items: center; margin: 8px 0 16px; }
+  .tri-top-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
+  .tri-bottom { display: flex; gap: 32px; justify-content: center; }
+  .tri-bottom-section { display: flex; flex-direction: column; align-items: center; }
+  .tri-arrows { display: flex; justify-content: center; margin: 4px 0; }
+  .tri-box {
+    width: 64px; height: 64px; border: 2.5px solid var(--warm-300); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem; font-weight: 900; color: var(--warm-800); background: #fff; position: relative;
+  }
+  .tri-box.top { width: 72px; height: 72px; font-size: 2rem; border-color: var(--app-blue); background: var(--app-blue-soft); }
+  .tri-box.blank { border-style: dashed; border-color: var(--app-orange); background: var(--app-orange-soft); color: var(--app-orange); font-size: 1.5rem; }
+  .tri-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); color: var(--app-green); animation: popIn 0.35s ease; }
+  .tri-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); color: var(--app-red); animation: shake 0.4s ease; }
+  .tri-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
+  .tri-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
+
+  /* Hint dots */
+  .hint-dots { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; max-width: 120px; min-height: 16px; margin: 4px 0; }
+  .hint-dot { width: 12px; height: 12px; border-radius: 50%; opacity: 0.7; }
+  .hint-dot.orange { background: var(--app-orange); }
+  .hint-dot.green { background: var(--app-green); }
+
+  /* ===== Circle Combine Mode ===== */
+  .circle-box {
+    width: 80px; height: 80px; border: 2.5px solid var(--warm-300); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 3px; padding: 10px; background: #fff; position: relative;
+  }
+  .circle-box.top { width: 90px; height: 90px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 12px; }
+  .circle-box.blank { border-style: dashed; border-color: var(--warm-300); background: var(--warm-50); }
+  .circle-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
+  .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
+  .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
+  .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
+  .cdot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .cdot.orange { background: var(--app-orange); }
+  .cdot.green { background: var(--app-green); }
+  .cdot.blue { background: #7EC8E3; }
+  .circle-box.top .cdot { width: 13px; height: 13px; }
+
+  /* Choices */
+  .choices-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; width: 100%; max-width: 280px; margin-top: 16px; position: relative;
+  }
+  .choice-btn {
+    padding: 16px; border: 2.5px solid var(--border); border-radius: 16px;
+    background: #fff; font-size: 1.75rem; font-weight: 900; color: var(--warm-700);
+    cursor: pointer; font-family: inherit; transition: all 0.1s; text-align: center;
+  }
+  .choice-btn:active:not(:disabled) { transform: scale(0.95); }
+  .choice-btn.correct { border-color: var(--app-green); background: var(--app-green-light); color: var(--app-green); animation: popIn 0.35s ease; }
+  .choice-btn.wrong { border-color: var(--app-red); background: var(--app-red-light); color: var(--app-red); animation: shake 0.4s ease; }
+  .choice-btn:disabled { pointer-events: none; opacity: 0.4; }
+  .choices-grid.chips-hidden .choice-btn { visibility: hidden; }
+  .choices-grid.chips-locked .choice-btn { pointer-events: none; opacity: 0.4; }
+
+  .circle-choice-btn {
+    padding: 12px; border: 2.5px solid var(--border); border-radius: 16px;
+    background: #fff; cursor: pointer; font-family: inherit; transition: all 0.1s;
+    display: flex; align-items: center; justify-content: center; min-height: 56px;
+  }
+  .choice-dots-grid { display: grid; grid-template-columns: repeat(5, auto); gap: 4px; justify-content: start; }
+  .circle-choice-btn:active:not(:disabled) { transform: scale(0.95); }
+  .circle-choice-btn.correct { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; }
+  .circle-choice-btn.wrong { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
+  .circle-choice-btn:disabled { pointer-events: none; opacity: 0.4; }
+  .circle-choice-btn .cdot { width: 14px; height: 14px; }
+  .choices-grid.chips-hidden .circle-choice-btn { visibility: hidden; }
+  .choices-grid.chips-locked .circle-choice-btn { pointer-events: none; opacity: 0.4; }
+
+  /* Reveal button */
+  .reveal-btn-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; }
+  .reveal-btn { padding: 12px 28px; border: 2px solid #C4AA82; border-radius: 14px; background: #FAF5EE; font-size: 0.95rem; font-weight: 700; color: #7B6545; cursor: pointer; font-family: inherit; }
+  .impulse-msg { font-size: 0.95rem; font-weight: 600; color: var(--app-orange); margin-top: 12px; min-height: 24px; text-align: center; animation: pulse-count 1s ease infinite; }
+
+  /* Complete */
+  .complete-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.95); border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; z-index: 10; backdrop-filter: blur(4px); }
+  .complete-emoji { font-size: 56px; }
+  .complete-msg { font-size: 1.25rem; font-weight: 900; color: var(--warm-800); }
+  .complete-sub { font-size: 0.85rem; color: var(--warm-400); }
+  .next-btn { margin-top: 8px; padding: 14px 36px; border: none; border-radius: 12px; background: var(--app-blue); color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: transform 0.12s; }
+  .next-btn:active { transform: scale(0.96); }
+
+  /* Feedback */
+  .feedback-float { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0); font-size: 64px; z-index: 100; pointer-events: none; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .feedback-float.show { transform: translate(-50%,-50%) scale(1); }
+
+  /* Wrong Notes */
+  .wrong-notes-btn { width: 100%; padding: 14px 0; border-radius: 14px; border: 2.5px solid #F07070; background: #FFF5F5; color: #F07070; font-family: 'Noto Sans KR', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; transition: transform .1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .wrong-notes-btn:active { transform: scale(.97); }
+  .wrong-notes-btn .badge { background: #F07070; color: white; border-radius: 50%; min-width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; }
+  .wn-view { display: none; flex-direction: column; align-items: center; padding: 24px 20px; }
+  .wn-view.active { display: flex; }
+  .wn-header { text-align: center; margin-bottom: 20px; }
+  .wn-header h2 { font-size: 1.25rem; font-weight: 900; color: #4A4035; margin: 0 0 4px; }
+  .wn-header p { font-size: .85rem; color: #B8AD9E; margin: 0; }
+  .wn-list { width: 100%; max-width: 400px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+  .wn-chip { padding: 8px 16px; border-radius: 10px; background: #FFF5F5; border: 1.5px solid #F07070; font-size: .9rem; font-weight: 700; color: #F07070; }
+  .wn-empty { color: #B8AD9E; font-size: .9rem; margin: 40px 0; }
+  .wn-actions { display: flex; gap: 10px; width: 100%; max-width: 320px; }
+  .wn-actions button { flex: 1; padding: 13px 0; border-radius: 12px; font-family: 'Noto Sans KR', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: transform .1s; }
+  .wn-actions button:active { transform: scale(.97); }
+  .wn-btn-back { border: 2.5px solid #E8E2DA; background: white; color: #8C8070; }
+  .wn-btn-start { border: none; background: #F07070; color: white; box-shadow: 0 2px 8px rgba(240,112,112,.3); }
+  .wn-btn-clear { border: 1.5px solid #E8E2DA; background: white; color: #B8AD9E; padding: 8px 16px; border-radius: 8px; font-size: .75rem; font-weight: 600; cursor: pointer; margin-top: 12px; font-family: 'Noto Sans KR', sans-serif; }
+
+  /* Animations */
+  @keyframes popIn { 0%{transform:scale(.8);opacity:.5} 45%{transform:scale(1.15);opacity:1} 65%{transform:scale(.92)} 80%{transform:scale(1.05)} 100%{transform:scale(1)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  @keyframes pulse-count { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.08);opacity:.7} }
+
+  /* ===== Small phones ===== */
+  @media (max-width: 380px) {
+    .app { padding: 16px 14px; }
+    .brand h1, .login-logo-area h1 { font-size: 1.5rem; }
+    .brand-sub { margin-bottom: 16px; }
+    .mode-card { padding: 14px 12px; border-radius: 16px; }
+    .mode-card h2 { font-size: 0.95rem; }
+    .mode-btns { gap: 4px; }
+    .start-btn { padding: 7px 4px; }
+    .tri-box { width: 52px; height: 52px; font-size: 1.4rem; border-radius: 10px; }
+    .tri-box.top { width: 58px; height: 58px; font-size: 1.6rem; }
+    .tri-box.blank { font-size: 1.2rem; }
+    .tri-arrows svg { width: 130px; }
+    .tri-bottom { gap: 20px; }
+    .hint-dots { max-width: 90px; }
+    .hint-dot { width: 10px; height: 10px; }
+    .choice-btn { padding: 12px; font-size: 1.4rem; border-radius: 12px; }
+    .choices-grid { gap: 8px; max-width: 240px; }
+    .circle-box { width: 64px; height: 64px; padding: 8px; }
+    .circle-box.top { width: 72px; height: 72px; padding: 10px; }
+    .cdot { width: 10px; height: 10px; }
+    .circle-box.top .cdot { width: 11px; height: 11px; }
+    .circle-choice-btn { padding: 8px; min-height: 46px; }
+    .circle-choice-btn .cdot { width: 12px; height: 12px; }
+    .game-container { padding: 16px 12px; border-radius: 16px; }
+    .play-header { gap: 8px; }
+    .login-logo-area .turtle-svg svg, .brand .turtle-svg svg { width: 90px; height: 75px; }
+    .setting-title { font-size: 0.8rem; }
+  }
+  @media (min-width: 381px) and (max-width: 767px) { .app { padding: 20px 18px; } }
+  @media (min-width: 768px) {
+    body { align-items: center; padding: 32px; }
+    .app { max-width: 560px; min-height: auto; border-radius: 32px; box-shadow: 0 8px 48px rgba(0,0,0,0.07); padding: 44px 40px; }
+    .login-view { min-height: auto; padding: 60px 40px; }
+    .brand h1, .login-logo-area h1 { font-size: 2.1rem; }
+    .mode-card { padding: 24px 22px; }
+    .tri-box { width: 76px; height: 76px; font-size: 2.1rem; }
+    .tri-box.top { width: 84px; height: 84px; font-size: 2.4rem; }
+    .tri-bottom { gap: 48px; }
+    .hint-dot { width: 14px; height: 14px; }
+    .hint-dots { max-width: 150px; gap: 5px; }
+    .choice-btn { padding: 20px; font-size: 2.1rem; }
+    .choices-grid { max-width: 320px; gap: 14px; }
+    .circle-box { width: 96px; height: 96px; padding: 14px; }
+    .circle-box.top { width: 106px; height: 106px; padding: 16px; }
+    .cdot { width: 14px; height: 14px; }
+    .circle-box.top .cdot { width: 15px; height: 15px; }
+    .circle-choice-btn .cdot { width: 16px; height: 16px; }
+    .game-container { padding: 28px 24px; }
+    .login-buttons { max-width: 360px; }
+    .login-btn { padding: 16px 24px; font-size: 1rem; }
+    .settings-section { max-width: 480px; }
+  }
+  @media (min-width: 1024px) { body { padding: 48px; } .app { max-width: 600px; padding: 52px 48px; } }
+
+  /* Splash */
+  .splash-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out; }
+  .splash-overlay.fade-out { opacity: 0; pointer-events: none; }
+  .splash-logo { animation: splashFloat 2.4s ease-in-out infinite; margin-bottom: 24px; }
+  .splash-title { font-size: 2rem; font-weight: 900; letter-spacing: -0.025em; margin-bottom: 8px; }
+  .splash-subtitle { color: #B8B0A8; font-size: 0.9375rem; font-weight: 500; margin-bottom: 48px; }
+  @keyframes splashFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @media (max-width:380px) { .splash-logo svg{width:100px;height:84px} .splash-title{font-size:1.5rem} }
+  @media (min-width:768px) { .splash-logo svg{width:160px;height:134px} .splash-title{font-size:2.5rem} }
+</style>
+</head>
+<body>
+
+<!-- ══════ Splash ══════ -->
+<div id="splash" class="splash-overlay">
+  <div class="splash-logo">
+    <svg viewBox="0 0 120 100" width="140" height="117" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="72" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(-20 30 72)"/>
+      <ellipse cx="78" cy="76" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(15 78 76)"/>
+      <ellipse cx="28" cy="54" rx="9" ry="5.5" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(-10 28 54)"/>
+      <path d="M18 60 L10 55" stroke="#F2DC8C" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="55" cy="58" rx="35" ry="20" fill="#F5E6C8" stroke="#3A9B6A" stroke-width="2"/>
+      <ellipse cx="52" cy="42" rx="32" ry="28" fill="#7EDCAA" stroke="#3A9B6A" stroke-width="2.5"/>
+      <path d="M52 18 L42 32 L42 48 L52 58 L62 48 L62 32 Z" fill="none" stroke="#3A9B6A" stroke-width="1.3" opacity=".35"/>
+      <line x1="42" y1="32" x2="24" y2="38" stroke="#3A9B6A" stroke-width="1.3" opacity=".35"/>
+      <line x1="62" y1="32" x2="80" y2="38" stroke="#3A9B6A" stroke-width="1.3" opacity=".35"/>
+      <line x1="42" y1="48" x2="26" y2="56" stroke="#3A9B6A" stroke-width="1.3" opacity=".35"/>
+      <line x1="62" y1="48" x2="78" y2="56" stroke="#3A9B6A" stroke-width="1.3" opacity=".35"/>
+      <ellipse cx="42" cy="26" rx="6" ry="4" fill="white" opacity=".35" transform="rotate(-15 42 26)"/>
+      <ellipse cx="62" cy="36" rx="4" ry="3" fill="white" opacity=".2"/>
+      <ellipse cx="92" cy="40" rx="17" ry="15" fill="#F5E6C8" stroke="#3A9B6A" stroke-width="2.5"/>
+      <ellipse cx="82" cy="72" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(10 82 72)"/>
+      <circle cx="99" cy="35" r="4" fill="white" stroke="#3A9B6A" stroke-width="1.5"/>
+      <circle cx="100" cy="34" r="2.5" fill="#3A9B6A"/>
+      <circle cx="101" cy="33" r="1" fill="white"/>
+      <circle cx="100" cy="44" r="3.5" fill="#F0A050" opacity=".4"/>
+      <path d="M94 46 Q98 50 103 46" fill="none" stroke="#3A9B6A" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h1 class="splash-title"><span style="color:#6BADE8;">느린</span><span style="color:#F0A050;">아이</span> <span style="color:#4A4035;">모으기 연습</span></h1>
+  <p class="splash-subtitle">수를 모으는 연습을 해보세요</p>
+</div>
+
+<div class="app">
+
+<!-- ===== Login View ===== -->
+<div id="login-view" class="login-view">
+  <div class="login-logo-area">
+    <div class="turtle-svg">
+      <svg viewBox="0 0 120 100" width="120" height="100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="30" cy="72" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(-20 30 72)"/>
+        <ellipse cx="78" cy="76" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(15 78 76)"/>
+        <ellipse cx="28" cy="54" rx="9" ry="5.5" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(-10 28 54)"/>
+        <path d="M18 60 L10 55" stroke="#F2DC8C" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="55" cy="58" rx="35" ry="20" fill="#F5E6C8" stroke="#3A9B6A" stroke-width="2"/>
+        <ellipse cx="52" cy="42" rx="32" ry="28" fill="#7EDCAA" stroke="#3A9B6A" stroke-width="2.5"/>
+        <path d="M52 18 L42 32 L42 48 L52 58 L62 48 L62 32 Z" fill="none" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="42" y1="32" x2="24" y2="38" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="62" y1="32" x2="80" y2="38" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="42" y1="48" x2="26" y2="56" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="62" y1="48" x2="78" y2="56" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <ellipse cx="42" cy="26" rx="6" ry="4" fill="white" opacity="0.35" transform="rotate(-15 42 26)"/>
+        <ellipse cx="62" cy="36" rx="4" ry="3" fill="white" opacity="0.2"/>
+        <ellipse cx="92" cy="40" rx="17" ry="15" fill="#F5E6C8" stroke="#3A9B6A" stroke-width="2.5"/>
+        <ellipse cx="82" cy="72" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(10 82 72)"/>
+        <circle cx="99" cy="35" r="4" fill="white" stroke="#3A9B6A" stroke-width="1.5"/>
+        <circle cx="100" cy="34" r="2.5" fill="#3A9B6A"/>
+        <circle cx="101" cy="33" r="1" fill="white"/>
+        <circle cx="100" cy="44" r="3.5" fill="#F0A050" opacity="0.4"/>
+        <path d="M94 46 Q98 50 103 46" fill="none" stroke="#3A9B6A" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1><span style="color:#6BADE8;">느린</span><span style="color:#F0A050;">아이</span> <span style="color:#2E261D;">모으기 연습</span></h1>
+    <p class="login-subtitle">수를 모으는 연습을 해보세요</p>
+  </div>
+  <div class="login-buttons">
+    <button class="login-btn kakao" onclick="doLogin('kakao')">
+      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 1C4.477 1 0 4.477 0 8.667c0 2.7 1.753 5.072 4.393 6.413-.192.717-.694 2.6-.794 3.004-.124.497.182.49.383.356.158-.105 2.51-1.708 3.525-2.398.8.118 1.628.18 2.493.18 5.523 0 10-3.477 10-7.555C20 4.477 15.523 1 10 1z" fill="#191919"/></svg>
+      카카오 로그인
+    </button>
+    <button class="login-btn naver" onclick="doLogin('naver')">
+      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M13.57 10.684L6.066 0H0v20h6.43V9.316L13.934 20H20V0h-6.43v10.684z" fill="white"/></svg>
+      네이버 로그인
+    </button>
+    <button class="login-btn google" onclick="doLogin('google')">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" fill="#FFC107"/><path d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" fill="#FF3D00"/><path d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" fill="#4CAF50"/><path d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.001-.001 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" fill="#1976D2"/></svg>
+      Google 로그인
+    </button>
+    <button class="login-btn facebook" onclick="doLogin('facebook')">
+      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" fill="white"/></svg>
+      Facebook 로그인
+    </button>
+  </div>
+</div>
+
+<!-- ===== Start View ===== -->
+<div id="start-view" class="hidden" style="position:relative;">
+  <button onclick="shareApp()" style="position:absolute;top:8px;right:8px;background:white;border:2px solid #E8E2DA;border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#8C8070;z-index:10;" title="공유하기">
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>
+  </button>
+  <div class="brand">
+    <div class="turtle-svg">
+      <svg viewBox="0 0 120 100" width="120" height="100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="30" cy="72" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(-20 30 72)"/>
+        <ellipse cx="78" cy="76" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(15 78 76)"/>
+        <ellipse cx="28" cy="54" rx="9" ry="5.5" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(-10 28 54)"/>
+        <path d="M18 60 L10 55" stroke="#F2DC8C" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="55" cy="58" rx="35" ry="20" fill="#F5E6C8" stroke="#3A9B6A" stroke-width="2"/>
+        <ellipse cx="52" cy="42" rx="32" ry="28" fill="#7EDCAA" stroke="#3A9B6A" stroke-width="2.5"/>
+        <path d="M52 18 L42 32 L42 48 L52 58 L62 48 L62 32 Z" fill="none" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="42" y1="32" x2="24" y2="38" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="62" y1="32" x2="80" y2="38" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="42" y1="48" x2="26" y2="56" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <line x1="62" y1="48" x2="78" y2="56" stroke="#3A9B6A" stroke-width="1.3" opacity="0.35"/>
+        <ellipse cx="42" cy="26" rx="6" ry="4" fill="white" opacity="0.35" transform="rotate(-15 42 26)"/>
+        <ellipse cx="62" cy="36" rx="4" ry="3" fill="white" opacity="0.2"/>
+        <ellipse cx="92" cy="40" rx="17" ry="15" fill="#F5E6C8" stroke="#3A9B6A" stroke-width="2.5"/>
+        <ellipse cx="82" cy="72" rx="10" ry="6" fill="#F2DC8C" stroke="#3A9B6A" stroke-width="2" transform="rotate(10 82 72)"/>
+        <circle cx="99" cy="35" r="4" fill="white" stroke="#3A9B6A" stroke-width="1.5"/>
+        <circle cx="100" cy="34" r="2.5" fill="#3A9B6A"/>
+        <circle cx="101" cy="33" r="1" fill="white"/>
+        <circle cx="100" cy="44" r="3.5" fill="#F0A050" opacity="0.4"/>
+        <path d="M94 46 Q98 50 103 46" fill="none" stroke="#3A9B6A" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1><span style="color:#6BADE8;">느린</span><span style="color:#F0A050;">아이</span> <span style="color:#2E261D;">모으기 연습</span></h1>
+  </div>
+  <p class="brand-sub">수를 모으는 연습을 해보세요</p>
+
+  <!-- Mode 1: 합이 5 이하 -->
+  <div class="mode-card">
+    <h2>합이 5 이하</h2>
+    <p class="desc">두 수를 모아 5 이하의 합을 만드는 연습이에요</p>
+    <div class="mode-btns">
+      <!-- 동그라미 모으기 -->
+      <button class="start-btn" onclick="startGame('circleCombine','upto5')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ccA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA1)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA1)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+        </svg>
+      </button>
+      <!-- 동그라미→숫자 -->
+      <button class="start-btn" onclick="startGame('numCombineCircle','upto5')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ncCA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA1)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA1)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+        </svg>
+      </button>
+      <!-- 숫자 모으기 -->
+      <button class="start-btn" onclick="startGame('numCombine','upto5')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ncA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA1)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA1)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="13" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">2</text>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <text x="56" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">3</text>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mode 2: 합이 9 이하 -->
+  <div class="mode-card">
+    <h2>합이 9 이하</h2>
+    <p class="desc">두 수를 모아 9 이하의 합을 만드는 연습이에요</p>
+    <div class="mode-btns">
+      <button class="start-btn" onclick="startGame('circleCombine','upto9')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ccA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA2)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA2)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+        </svg>
+      </button>
+      <button class="start-btn" onclick="startGame('numCombineCircle','upto9')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ncCA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA2)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA2)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+        </svg>
+      </button>
+      <button class="start-btn" onclick="startGame('numCombine','upto9')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ncA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA2)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA2)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="13" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <text x="56" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">5</text>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mode 3: 제한 없음 -->
+  <div class="mode-card">
+    <h2>제한 없음</h2>
+    <p class="desc">더 큰 수까지 모으는 연습이에요</p>
+    <div class="mode-btns">
+      <button class="start-btn" onclick="startGame('circleCombine','unlimited')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ccA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA3)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA3)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+        </svg>
+      </button>
+      <button class="start-btn" onclick="startGame('numCombineCircle','unlimited')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ncCA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA3)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA3)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+        </svg>
+      </button>
+      <button class="start-btn" onclick="startGame('numCombine','unlimited')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="ncA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
+          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
+          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA3)"/>
+          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA3)"/>
+          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="13" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">7</text>
+          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <text x="56" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">9</text>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Wrong Notes Button -->
+  <button class="wrong-notes-btn" id="wrong-notes-btn" onclick="showWrongNotes()" style="display:none;">
+    오답노트 <span class="badge" id="wn-badge">0</span>
+  </button>
+
+  <!-- Settings -->
+  <div class="settings-section">
+    <div class="setting-divider">
+      <div class="setting-header">
+        <div>
+          <p class="setting-title">힌트 동그라미 <span class="badge">숫자 모으기 모드</span></p>
+          <p class="setting-desc">숫자 위에 작은 동그라미로 개수를 보여줘요</p>
+        </div>
+        <button class="toggle-track" id="hint-toggle" onclick="toggleHint()" role="switch">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+    </div>
+    <div class="setting-divider">
+      <div class="setting-header">
+        <div>
+          <p class="setting-title">음성 <span class="badge">정답/오답 음성 안내</span></p>
+        </div>
+        <button class="toggle-track" id="tts-toggle" onclick="toggleTTS()" role="switch">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+    </div>
+    <div class="setting-divider">
+      <div class="setting-header">
+        <div>
+          <p class="setting-title">충동방지 <span class="badge">보기 선택 모드</span></p>
+          <p class="setting-desc">생각할 시간을 줘요</p>
+        </div>
+        <button class="toggle-track" id="impulse-toggle" onclick="toggleImpulse()" role="switch">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+      <div class="impulse-details" id="impulse-details">
+        <div class="impulse-mode-options">
+          <button class="impulse-mode-btn" data-mode="hide" onclick="setImpulseMode('hide')">
+            <span class="impulse-mode-icon">👀</span>
+            <span class="impulse-mode-label">보기 확인</span>
+            <span class="impulse-mode-desc">버튼을 누르면 보기가 나타나요</span>
+          </button>
+          <button class="impulse-mode-btn" data-mode="lock" onclick="setImpulseMode('lock')">
+            <span class="impulse-mode-icon">🔒</span>
+            <span class="impulse-mode-label">선택 잠금</span>
+            <span class="impulse-mode-desc">N초 동안 선택할 수 없어요</span>
+          </button>
+        </div>
+        <div class="delay-row" id="impulse-delay-row"></div>
+      </div>
+    </div>
+  </div>
+  <button class="logout-btn" onclick="doLogout()">로그아웃</button>
+</div>
+
+<!-- ===== Wrong Notes View ===== -->
+<div id="wn-view" class="wn-view">
+  <div class="wn-header"><h2>오답노트</h2><p>틀렸던 문제를 다시 연습해요</p></div>
+  <div class="wn-list" id="wn-list"></div>
+  <div class="wn-actions">
+    <button class="wn-btn-back" onclick="showView('start')">돌아가기</button>
+    <button class="wn-btn-start" id="wn-start-btn" onclick="startWrongNotesPractice()">다시 풀기</button>
+  </div>
+  <button class="wn-btn-clear" id="wn-clear-btn" onclick="clearWrongNotes()">오답노트 비우기</button>
+</div>
+
+<!-- ===== Play View ===== -->
+<div id="play-view" class="hidden">
+  <div class="play-header">
+    <button class="back-btn" onclick="goHome()" aria-label="홈으로">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </button>
+    <div class="play-middle">
+      <span class="play-progress-label" id="play-progress-label">0 / 10</span>
+      <div class="play-progress-bar"><div class="play-progress-fill" id="play-progress-fill" style="width:0%"></div></div>
+    </div>
+    <span class="play-score" id="play-score">0/0 정답</span>
+  </div>
+  <span class="combo-badge" id="combo-badge"></span>
+  <div class="game-container" id="game-container"></div>
+</div>
+
+</div><!-- /.app -->
+<div class="feedback-float" id="feedback"></div>
+
+<script>
+// ===== Constants =====
+const STORAGE_KEY = 'slowmath_combining_settings';
+const LOGIN_KEY   = 'slowmath_combining_login';
+const WN_KEY      = 'slowmath_combining_wrong_notes';
+
+const MODES = {
+  upto5:     { label: '합이 5 이하',  maxTotal: 5 },
+  upto9:     { label: '합이 9 이하',  maxTotal: 9 },
+  unlimited: { label: '제한 없음',    maxTotal: 18 }
+};
+
+// ===== State =====
+let settings = loadSettings();
+let gameType  = '';
+let modeKey   = '';
+let correctCount = 0;
+let combo = 0;
+let questionNum = 0;
+let questions = [];
+let locked = false;
+let impulseTimer = null;
+let isWrongNotesPractice = false;
+
+// ===== Login =====
+function doLogin(provider) { localStorage.setItem(LOGIN_KEY, provider); showView('start'); }
+function doLogout() { localStorage.removeItem(LOGIN_KEY); showView('login'); }
+function checkLogin() { showView(localStorage.getItem(LOGIN_KEY) ? 'start' : 'login'); }
+
+function showView(name) {
+  document.getElementById('login-view').classList.toggle('hidden', name !== 'login');
+  document.getElementById('start-view').classList.toggle('hidden', name !== 'start');
+  document.getElementById('play-view').classList.toggle('hidden', name !== 'play');
+  const wnView = document.getElementById('wn-view');
+  wnView.classList.toggle('active', name === 'wn');
+  if (name === 'start') { renderSettingsUI(); updateWrongNotesBadge(); }
+}
+
+// ===== Settings =====
+function loadSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return { tts: s?.tts ?? true, hint: s?.hint ?? true, impulse: s?.impulse ?? true, impulseMode: s?.impulseMode ?? 'hide', impulseDelay: s?.impulseDelay ?? 3 };
+  } catch { return { tts: true, hint: true, impulse: true, impulseMode: 'hide', impulseDelay: 3 }; }
+}
+function saveSettings() { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); }
+function toggleTTS()     { settings.tts     = !settings.tts;     saveSettings(); renderSettingsUI(); }
+function toggleHint()    { settings.hint    = !settings.hint;    saveSettings(); renderSettingsUI(); }
+function toggleImpulse() { settings.impulse = !settings.impulse; saveSettings(); renderSettingsUI(); }
+function setImpulseMode(mode) { settings.impulseMode = mode; saveSettings(); renderSettingsUI(); }
+function setImpulseDelay(sec) { settings.impulseDelay = sec; saveSettings(); renderSettingsUI(); }
+
+function renderSettingsUI() {
+  document.getElementById('hint-toggle').classList.toggle('on', settings.hint);
+  document.getElementById('tts-toggle').classList.toggle('on', settings.tts);
+  document.getElementById('impulse-toggle').classList.toggle('on', settings.impulse);
+  document.getElementById('impulse-details').classList.toggle('show', settings.impulse);
+  document.querySelectorAll('.impulse-mode-btn').forEach(b => b.classList.toggle('selected', b.dataset.mode === settings.impulseMode));
+  const delayRow = document.getElementById('impulse-delay-row');
+  delayRow.classList.toggle('show', settings.impulseMode === 'lock');
+  delayRow.innerHTML = '';
+  for (let i = 1; i <= 10; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'imp-sec' + (settings.impulseDelay === i ? ' active' : '');
+    btn.textContent = i + '초';
+    btn.onclick = () => setImpulseDelay(i);
+    delayRow.appendChild(btn);
+  }
+}
+
+// ===== TTS =====
+function speak(text) {
+  if (!settings.tts || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR'; u.rate = 0.9;
+  setTimeout(() => window.speechSynthesis.speak(u), 50);
+}
+
+// ===== Navigation =====
+function goHome() {
+  if (impulseTimer) { clearInterval(impulseTimer); impulseTimer = null; }
+  isWrongNotesPractice = false;
+  showView('start');
+}
+
+function shareApp() {
+  if (navigator.share) { navigator.share({ title: '느린아이 모으기 연습', url: location.href }); }
+  else { navigator.clipboard?.writeText(location.href); alert('링크가 복사되었어요!'); }
+}
+
+// ===== Helpers =====
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function generateQuestions(mKey) {
+  const maxTotal = MODES[mKey].maxTotal;
+  const qs = [];
+  for (let total = 2; total <= maxTotal; total++) {
+    for (let left = 1; left < total; left++) {
+      qs.push({ total, left, right: total - left });
+    }
+  }
+  return shuffle(qs);
+}
+
+// ===== Feedback =====
+function showFeedback(emoji) {
+  const el = document.getElementById('feedback');
+  el.textContent = emoji;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 600);
+}
+
+// ===== Wrong Notes =====
+function getWrongNotes() {
+  try { return JSON.parse(localStorage.getItem(WN_KEY)) || []; } catch { return []; }
+}
+function saveWrongNotes(notes) { localStorage.setItem(WN_KEY, JSON.stringify(notes)); }
+function addWrongNote(key, q) {
+  const notes = getWrongNotes();
+  if (!notes.find(n => n.key === key)) { notes.push({ key, ...q }); saveWrongNotes(notes); }
+  updateWrongNotesBadge();
+}
+function removeWrongNote(key) {
+  saveWrongNotes(getWrongNotes().filter(n => n.key !== key));
+  updateWrongNotesBadge();
+}
+function clearWrongNotes() { saveWrongNotes([]); renderWrongNotesList(); updateWrongNotesBadge(); }
+function updateWrongNotesBadge() {
+  const notes = getWrongNotes();
+  const btn = document.getElementById('wrong-notes-btn');
+  const badge = document.getElementById('wn-badge');
+  btn.style.display = notes.length > 0 ? '' : 'none';
+  badge.textContent = notes.length;
+}
+function showWrongNotes() { renderWrongNotesList(); showView('wn'); }
+function renderWrongNotesList() {
+  const notes = getWrongNotes();
+  const list = document.getElementById('wn-list');
+  const startBtn = document.getElementById('wn-start-btn');
+  if (notes.length === 0) {
+    list.innerHTML = '<p class="wn-empty">오답이 없어요 🎉</p>';
+    startBtn.disabled = true;
+  } else {
+    list.innerHTML = notes.map(n => `<div class="wn-chip">${n.left} + ${n.right} = ${n.total}</div>`).join('');
+    startBtn.disabled = false;
+  }
+}
+function startWrongNotesPractice() {
+  const notes = getWrongNotes();
+  if (!notes.length) return;
+  isWrongNotesPractice = true;
+  gameType = 'numCombine';
+  correctCount = 0; combo = 0; questionNum = 0;
+  questions = shuffle(notes.map(n => ({ total: n.total, left: n.left, right: n.right })));
+  showView('play'); updateScoreUI(); nextQuestion();
+}
+
+// ===== Start Game =====
+function startGame(type, mKey) {
+  gameType = type; modeKey = mKey;
+  isWrongNotesPractice = false;
+  correctCount = 0; combo = 0; questionNum = 0;
+  questions = generateQuestions(mKey);
+  if (questions.length > 10) questions = questions.slice(0, 10);
+  showView('play'); updateScoreUI(); nextQuestion();
+}
+
+function updateScoreUI() {
+  const totalQ = questions.length;
+  document.getElementById('play-score').textContent = `${correctCount}/${totalQ} 정답`;
+  document.getElementById('combo-badge').textContent = '';
+  updateProgress();
+}
+
+function updateProgress() {
+  const label = document.getElementById('play-progress-label');
+  const fill  = document.getElementById('play-progress-fill');
+  const totalQ = questions.length;
+  const current = Math.min(questionNum, totalQ);
+  label.textContent = `${current} / ${totalQ}`;
+  fill.style.width = `${(current / totalQ) * 100}%`;
+  const ratio = current / totalQ;
+  fill.style.background = ratio <= 0.33 ? 'var(--app-red)' : ratio <= 0.66 ? 'var(--app-orange)' : 'var(--app-green)';
+}
+
+// ===== Next Question =====
+function nextQuestion() {
+  questionNum++;
+  locked = false;
+  if (impulseTimer) { clearInterval(impulseTimer); impulseTimer = null; }
+  if (questionNum > questions.length) { showComplete(); return; }
+  if (gameType === 'numCombine') renderNumCombineQuestion();
+  else if (gameType === 'numCombineCircle') renderNumCombineCircleQuestion();
+  else renderCircleCombineQuestion();
+  updateScoreUI();
+}
+
+// ===== Complete =====
+function showComplete() {
+  const gc = document.getElementById('game-container');
+  const totalQ = questions.length;
+  gc.innerHTML = `
+    <div class="complete-overlay" style="position:relative;margin-top:40px;">
+      <div class="complete-emoji">${correctCount === totalQ ? '🏆' : '👏'}</div>
+      <div class="complete-msg">${totalQ}문제 완료!</div>
+      <div class="complete-sub">${totalQ}문제 중 ${correctCount}개 정답</div>
+      <button class="next-btn" id="retry-btn">다시 하기</button>
+      <button class="next-btn" id="home-btn" style="margin-top:8px;background:var(--warm-200);color:var(--warm-700);">홈으로</button>
+    </div>`;
+  speak('모두 풀었어요! 잘했어요!');
+  document.getElementById('retry-btn').addEventListener('click', () => {
+    if (isWrongNotesPractice) startWrongNotesPractice();
+    else startGame(gameType, modeKey);
+  });
+  document.getElementById('home-btn').addEventListener('click', goHome);
+}
+
+// ===== Combining Triangle Render =====
+// Layout: top = blank (answer), bottom-left & bottom-right = given
+// Arrows point UPWARD from bottom boxes to top box
+function combineArrowsSVG() {
+  return `<svg width="160" height="36" viewBox="0 0 160 36">
+    <defs><marker id="arrowUp" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7" fill="none" stroke="#B8AD9E" stroke-width="1.2"/></marker></defs>
+    <line x1="30" y1="30" x2="60" y2="4" stroke="#B8AD9E" stroke-width="2" marker-end="url(#arrowUp)"/>
+    <line x1="130" y1="30" x2="100" y2="4" stroke="#B8AD9E" stroke-width="2" marker-end="url(#arrowUp)"/>
+  </svg>`;
+}
+
+function renderHintDots(count, color) {
+  let dots = '';
+  for (let i = 0; i < count; i++) dots += `<div class="hint-dot ${color}"></div>`;
+  return `<div class="hint-dots">${dots}</div>`;
+}
+
+// ===== Mode 1: 숫자 모으기 (numCombine) =====
+function renderNumCombineQuestion() {
+  const q = questions[questionNum - 1];
+  const answer = q.total;
+  const showHint = settings.hint;
+  const maxAnswer = MODES[modeKey]?.maxTotal ?? 18;
+
+  // Generate wrong choices
+  const wrongs = new Set();
+  while (wrongs.size < 3) {
+    const w = Math.max(2, answer + (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 3) + 1));
+    if (w !== answer && w >= 2 && w <= maxAnswer + 5) wrongs.add(w);
+  }
+  const choices = shuffle([answer, ...Array.from(wrongs).slice(0, 3)]);
+
+  const leftHint  = showHint ? renderHintDots(q.left,  'orange') : '';
+  const rightHint = showHint ? renderHintDots(q.right, 'green')  : '';
+
+  const gc = document.getElementById('game-container');
+  gc.innerHTML = `
+    <div class="question-label">${q.left} + ${q.right} 를 모으면 몇이 될까요?</div>
+    <div class="triangle-wrap">
+      <div class="tri-top-section">
+        <div class="tri-box top blank" id="tri-top">?</div>
+      </div>
+      <div class="tri-arrows">${combineArrowsSVG()}</div>
+      <div class="tri-bottom">
+        <div class="tri-bottom-section">
+          ${leftHint}
+          <div class="tri-box left-box">${q.left}</div>
+        </div>
+        <div class="tri-bottom-section">
+          ${rightHint}
+          <div class="tri-box right-box">${q.right}</div>
+        </div>
+      </div>
+    </div>
+    <div class="choices-grid" id="choices-grid">
+      ${choices.map(c => `<button class="choice-btn" data-val="${c}">${c}</button>`).join('')}
+    </div>
+    <div class="impulse-msg" id="impulse-msg"></div>`;
+
+  speak(`${q.left} 더하기 ${q.right} 는 얼마일까요?`);
+  applyImpulse('.choice-btn');
+
+  gc.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (locked) return;
+      const val = parseInt(btn.dataset.val);
+      const topBox = document.getElementById('tri-top');
+      if (val === answer) {
+        locked = true;
+        btn.classList.add('correct');
+        topBox.textContent = answer;
+        topBox.classList.remove('blank');
+        topBox.classList.add('correct-answer');
+        combo++; correctCount++;
+        showFeedback('🎉'); speak('정답이에요!');
+        if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
+        updateScoreUI();
+        setTimeout(() => nextQuestion(), 900);
+      } else {
+        btn.classList.add('wrong'); btn.disabled = true;
+        topBox.classList.add('wrong-answer');
+        combo = 0;
+        if (!isWrongNotesPractice) addWrongNote(`${q.left}-${q.right}-${q.total}`, q);
+        showFeedback('😢'); speak('다시 해봐요.');
+        setTimeout(() => topBox.classList.remove('wrong-answer'), 500);
+      }
+    });
+  });
+}
+
+// ===== Mode 2: 동그라미→숫자 (numCombineCircle) =====
+function renderCircleDots(count, colorClass) {
+  let d = '';
+  for (let i = 0; i < count; i++) d += `<div class="cdot ${colorClass}"></div>`;
+  return d;
+}
+
+function renderNumCombineCircleQuestion() {
+  const q = questions[questionNum - 1];
+  const answer = q.total;
+  const maxAnswer = MODES[modeKey]?.maxTotal ?? 18;
+
+  const wrongs = new Set();
+  while (wrongs.size < 3) {
+    const w = Math.max(2, answer + (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 3) + 1));
+    if (w !== answer && w >= 2 && w <= maxAnswer + 5) wrongs.add(w);
+  }
+  const choices = shuffle([answer, ...Array.from(wrongs).slice(0, 3)]);
+
+  const gc = document.getElementById('game-container');
+  gc.innerHTML = `
+    <div class="question-label">동그라미를 모으면 몇 개가 될까요?</div>
+    <div class="triangle-wrap">
+      <div class="tri-top-section">
+        <div class="tri-box top blank" id="tri-top">?</div>
+      </div>
+      <div class="tri-arrows">${combineArrowsSVG()}</div>
+      <div class="tri-bottom">
+        <div class="tri-bottom-section">
+          <div class="circle-box left-box">${renderCircleDots(q.left, 'orange')}</div>
+        </div>
+        <div class="tri-bottom-section">
+          <div class="circle-box right-box">${renderCircleDots(q.right, 'green')}</div>
+        </div>
+      </div>
+    </div>
+    <div class="choices-grid" id="choices-grid">
+      ${choices.map(c => `<button class="choice-btn" data-val="${c}">${c}</button>`).join('')}
+    </div>
+    <div class="impulse-msg" id="impulse-msg"></div>`;
+
+  speak(`동그라미 ${q.left}개와 ${q.right}개를 모으면 몇 개일까요?`);
+  applyImpulse('.choice-btn');
+
+  gc.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (locked) return;
+      const val = parseInt(btn.dataset.val);
+      const topBox = document.getElementById('tri-top');
+      if (val === answer) {
+        locked = true;
+        btn.classList.add('correct');
+        topBox.textContent = answer;
+        topBox.classList.remove('blank');
+        topBox.classList.add('correct-answer');
+        combo++; correctCount++;
+        showFeedback('🎉'); speak('정답이에요!');
+        if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
+        updateScoreUI();
+        setTimeout(() => nextQuestion(), 900);
+      } else {
+        btn.classList.add('wrong'); btn.disabled = true;
+        topBox.classList.add('wrong-answer');
+        combo = 0;
+        if (!isWrongNotesPractice) addWrongNote(`${q.left}-${q.right}-${q.total}`, q);
+        showFeedback('😢'); speak('다시 해봐요.');
+        setTimeout(() => topBox.classList.remove('wrong-answer'), 500);
+      }
+    });
+  });
+}
+
+// ===== Mode 3: 동그라미 모으기 (circleCombine) =====
+function renderCircleCombineQuestion() {
+  const q = questions[questionNum - 1];
+  const answer = q.total;
+  const maxAnswer = MODES[modeKey]?.maxTotal ?? 18;
+
+  const wrongs = new Set();
+  while (wrongs.size < 3) {
+    const w = Math.max(2, answer + (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 3) + 1));
+    if (w !== answer && w >= 2 && w <= maxAnswer + 5) wrongs.add(w);
+  }
+  const choices = shuffle([answer, ...Array.from(wrongs).slice(0, 3)]);
+
+  const gc = document.getElementById('game-container');
+  gc.innerHTML = `
+    <div class="question-label">동그라미를 모으면 몇 개가 될까요?</div>
+    <div class="triangle-wrap">
+      <div class="tri-top-section">
+        <div class="circle-box top blank" id="circle-top"><span style="font-size:1.4rem;font-weight:700;color:var(--warm-400);">?</span></div>
+      </div>
+      <div class="tri-arrows">${combineArrowsSVG()}</div>
+      <div class="tri-bottom">
+        <div class="tri-bottom-section">
+          <div class="circle-box left-box">${renderCircleDots(q.left, 'orange')}</div>
+        </div>
+        <div class="tri-bottom-section">
+          <div class="circle-box right-box">${renderCircleDots(q.right, 'green')}</div>
+        </div>
+      </div>
+    </div>
+    <div class="choices-grid" id="choices-grid">
+      ${choices.map(c => `<button class="circle-choice-btn" data-val="${c}"><div class="choice-dots-grid">${renderCircleDots(c, 'blue')}</div></button>`).join('')}
+    </div>
+    <div class="impulse-msg" id="impulse-msg"></div>`;
+
+  speak(`동그라미 ${q.left}개와 ${q.right}개를 모으면 몇 개일까요?`);
+  applyImpulse('.circle-choice-btn');
+
+  gc.querySelectorAll('.circle-choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (locked) return;
+      const val = parseInt(btn.dataset.val);
+      const topBox = document.getElementById('circle-top');
+      if (val === answer) {
+        locked = true;
+        btn.classList.add('correct');
+        topBox.innerHTML = `<div class="choice-dots-grid">${renderCircleDots(answer, 'blue')}</div>`;
+        topBox.classList.remove('blank');
+        topBox.classList.add('correct-answer');
+        combo++; correctCount++;
+        showFeedback('🎉'); speak('정답이에요!');
+        if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
+        updateScoreUI();
+        setTimeout(() => nextQuestion(), 900);
+      } else {
+        btn.classList.add('wrong'); btn.disabled = true;
+        topBox.classList.add('wrong-answer');
+        combo = 0;
+        if (!isWrongNotesPractice) addWrongNote(`${q.left}-${q.right}-${q.total}`, q);
+        showFeedback('😢'); speak('다시 해봐요.');
+        setTimeout(() => topBox.classList.remove('wrong-answer'), 500);
+      }
+    });
+  });
+}
+
+// ===== Impulse Control =====
+function applyImpulse(btnSelector) {
+  if (!settings.impulse) return;
+  const grid = document.getElementById('choices-grid');
+  const msgEl = document.getElementById('impulse-msg');
+  if (settings.impulseMode === 'hide') {
+    grid.classList.add('chips-hidden');
+    const wrap = document.createElement('div');
+    wrap.className = 'reveal-btn-wrap';
+    const revealBtn = document.createElement('button');
+    revealBtn.className = 'reveal-btn';
+    revealBtn.textContent = '👀 보기 확인';
+    revealBtn.addEventListener('click', () => { grid.classList.remove('chips-hidden'); wrap.remove(); });
+    wrap.appendChild(revealBtn);
+    grid.appendChild(wrap);
+  } else {
+    grid.classList.add('chips-locked');
+    grid.querySelectorAll(btnSelector).forEach(b => { b.disabled = true; });
+    let countdown = settings.impulseDelay;
+    msgEl.textContent = `${countdown}초 동안 생각해 보세요`;
+    impulseTimer = setInterval(() => {
+      countdown--;
+      if (countdown > 0) { msgEl.textContent = `${countdown}초 동안 생각해 보세요`; }
+      else {
+        clearInterval(impulseTimer); impulseTimer = null; msgEl.textContent = '';
+        grid.classList.remove('chips-locked');
+        grid.querySelectorAll(btnSelector).forEach(b => { b.disabled = false; });
+      }
+    }, 1000);
+  }
+}
+
+// ===== Init =====
+window.addEventListener('DOMContentLoaded', () => {
+  const splash = document.getElementById('splash');
+  setTimeout(() => {
+    splash.classList.add('fade-out');
+    setTimeout(() => { splash.remove(); checkLogin(); }, 500);
+  }, 1800);
+});
+</script>
+</body>
+</html>

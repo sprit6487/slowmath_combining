@@ -262,10 +262,12 @@
   .drag-circle-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .drag-circle-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
   .drag-circle-box .cdot { cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
-  .drag-tray { width: 182px; min-height: 80px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 22px); grid-auto-rows: 22px; gap: 6px; padding: 14px 16px; align-content: start; position: relative; }
+  .drag-tray { width: 182px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 22px); grid-auto-rows: 22px; gap: 6px; padding: 14px 16px; align-content: start; position: relative; }
   .drag-hint-txt { font-size: 1rem; color: #6BADE8; font-weight: 600; pointer-events: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .tray-dot { width: 22px; height: 22px; border-radius: 50%; animation: popIn 0.2s ease; }
-  .tray-dot.blue { background: #6BADE8; }
+  .tray-dot, .tray-slot { width: 22px; height: 22px; border-radius: 50%; }
+  .tray-dot { background: #6BADE8; animation: popIn 0.2s ease; }
+  .tray-slot { background: transparent; }
+  .tray-slot.blue { background: #6BADE8; animation: popIn 0.2s ease; }
 
   /* Reveal button */
   .reveal-btn-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; }
@@ -337,7 +339,7 @@
     .drag-circle-box .cdot { width: 14px !important; height: 14px !important; }
     .drag-sources-row { gap: 12px; }
     .drag-tray { width: 162px; min-height: 68px; grid-template-columns: repeat(5, 18px); grid-auto-rows: 18px; gap: 6px; padding: 12px 14px; }
-    .tray-dot { width: 18px; height: 18px; }
+    .tray-dot, .tray-slot { width: 18px; height: 18px; }
     .game-container { padding: 16px 12px; border-radius: 16px; }
     .play-header { gap: 8px; }
     .login-logo-area .turtle-svg svg, .brand .turtle-svg svg { width: 90px; height: 75px; }
@@ -366,7 +368,7 @@
     .drag-circle-box .cdot { width: 26px !important; height: 26px !important; }
     .drag-sources-row { gap: 32px; }
     .drag-tray { width: 222px; min-height: 100px; grid-template-columns: repeat(5, 30px); grid-auto-rows: 30px; gap: 8px; padding: 16px 20px; }
-    .tray-dot { width: 30px; height: 30px; }
+    .tray-dot, .tray-slot { width: 30px; height: 30px; }
     .game-container { padding: 28px 24px; }
     .login-buttons { max-width: 360px; }
     .login-btn { padding: 16px 24px; font-size: 1rem; }
@@ -1040,6 +1042,8 @@ function renderDragCombineQuestion() {
   let rightDotsHTML = '';
   for (let i = 0; i < q.right; i++) rightDotsHTML += `<div class="cdot green"></div>`;
 
+  const slotsHTML = Array.from({length: maxAnswer}, () => `<div class="tray-slot"></div>`).join('');
+
   const gc = document.getElementById('game-container');
   gc.innerHTML = `
     <div class="question-label">큰 원을 파란 칸에 모두 모아봐요!</div>
@@ -1049,6 +1053,7 @@ function renderDragCombineQuestion() {
         <div class="drag-circle-box green-src" data-count="${q.right}" data-color="green">${rightDotsHTML}</div>
       </div>
       <div class="drag-tray" id="drag-tray">
+        ${slotsHTML}
         <span class="drag-hint-txt" id="drag-hint">여기에 모아요</span>
       </div>
     </div>
@@ -1093,6 +1098,7 @@ function setupDragCombine(q, answer) {
 
   const total = q.left + q.right;
   let droppedCount = 0;
+  let filledSlots = 0;
 
   document.querySelectorAll('.drag-circle-box .cdot').forEach(dot => {
     let ghost = null;
@@ -1127,9 +1133,11 @@ function setupDragCombine(q, answer) {
         dot.style.pointerEvents = 'none';
         const hint = document.getElementById('drag-hint');
         if (hint) hint.remove();
-        const trayDot = document.createElement('div');
-        trayDot.className = 'tray-dot blue';
-        tray.appendChild(trayDot);
+        const slots = tray.querySelectorAll('.tray-slot');
+        if (filledSlots < slots.length) {
+          slots[filledSlots].classList.add('blue');
+          filledSlots++;
+        }
         droppedCount++;
         if (droppedCount >= total) setTimeout(onAllDropped, 200);
       } else {

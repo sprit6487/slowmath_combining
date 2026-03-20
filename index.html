@@ -106,6 +106,7 @@
   .start-btn:hover, .start-btn:active {
     background: var(--app-blue-soft); border-color: var(--app-blue); color: var(--app-blue);
   }
+  .btn-label { font-size: 0.6rem; font-weight: 600; color: var(--warm-400); white-space: nowrap; line-height: 1; }
 
   /* Settings */
   .settings-section { width: 100%; margin-top: 6px; }
@@ -251,20 +252,19 @@
 
   /* ===== Drag Combine Mode ===== */
   .drag-game-wrap { display: flex; flex-direction: column; align-items: center; gap: 24px; margin: 16px 0 20px; }
-  .drag-sources-row { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  .drag-sources-row { display: flex; gap: 20px; justify-content: center; flex-wrap: nowrap; }
   .drag-circle-box {
-    width: 120px; height: 120px; border: 2.5px solid; border-radius: 50%;
-    display: grid; grid-template-columns: repeat(3, 18px);
-    gap: 5px; padding: 16px; position: relative;
+    width: 148px; height: 148px; border: 2.5px solid; border-radius: 50%;
+    display: grid; grid-template-columns: repeat(3, 32px);
+    gap: 6px; padding: 18px; position: relative;
     align-content: center; justify-content: center;
   }
-  .drag-circle-box .cdot { width: 18px !important; height: 18px !important; }
   .drag-circle-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .drag-circle-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
-  .drag-circle-box .cdot { cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
-  .drag-tray { width: 182px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 22px); grid-auto-rows: 22px; gap: 6px; padding: 14px 16px; align-content: start; position: relative; }
+  .drag-circle-box .cdot { width: 26px !important; height: 26px !important; cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; justify-self: center; align-self: center; }
+  .drag-tray { width: 220px; height: 158px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 26px); grid-template-rows: repeat(4, 26px); gap: 8px; padding: 15px 18px; align-content: center; justify-content: center; position: relative; }
   .drag-hint-txt { font-size: 1rem; color: #6BADE8; font-weight: 600; pointer-events: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .tray-dot, .tray-slot { width: 22px; height: 22px; border-radius: 50%; }
+  .tray-dot, .tray-slot { width: 26px; height: 26px; border-radius: 50%; }
   .tray-dot { background: #6BADE8; animation: popIn 0.2s ease; }
   .tray-slot { background: transparent; }
   .tray-slot.blue { background: #6BADE8; animation: popIn 0.2s ease; }
@@ -335,11 +335,11 @@
     .circle-box.top .cdot { width: 17px; height: 17px; }
     .circle-choice-btn { padding: 8px; min-height: 46px; }
     .circle-choice-btn .cdot { width: 12px; height: 12px; }
-    .drag-circle-box { width: 100px; height: 100px; grid-template-columns: repeat(3, 14px); gap: 4px; padding: 14px; }
-    .drag-circle-box .cdot { width: 14px !important; height: 14px !important; }
-    .drag-sources-row { gap: 12px; }
-    .drag-tray { width: 162px; min-height: 68px; grid-template-columns: repeat(5, 18px); grid-auto-rows: 18px; gap: 6px; padding: 12px 14px; }
-    .tray-dot, .tray-slot { width: 18px; height: 18px; }
+    .drag-circle-box { width: 130px; height: 130px; grid-template-columns: repeat(3, 28px); gap: 5px; padding: 14px; }
+    .drag-circle-box .cdot { width: 22px !important; height: 22px !important; justify-self: center; align-self: center; }
+    .drag-sources-row { gap: 16px; }
+    .drag-tray { width: 196px; height: 135px; grid-template-columns: repeat(5, 22px); grid-template-rows: repeat(4, 22px); gap: 7px; padding: 13px 16px; align-content: center; justify-content: center; }
+    .tray-dot, .tray-slot { width: 22px; height: 22px; }
     .game-container { padding: 16px 12px; border-radius: 16px; }
     .play-header { gap: 8px; }
     .login-logo-area .turtle-svg svg, .brand .turtle-svg svg { width: 90px; height: 75px; }
@@ -364,11 +364,11 @@
     .cdot { width: 22px; height: 22px; }
     .circle-box.top .cdot { width: 23px; height: 23px; }
     .circle-choice-btn .cdot { width: 16px; height: 16px; }
-    .drag-circle-box { width: 160px; height: 160px; grid-template-columns: repeat(3, 26px); gap: 6px; padding: 20px; }
-    .drag-circle-box .cdot { width: 26px !important; height: 26px !important; }
-    .drag-sources-row { gap: 32px; }
-    .drag-tray { width: 222px; min-height: 100px; grid-template-columns: repeat(5, 30px); grid-auto-rows: 30px; gap: 8px; padding: 16px 20px; }
-    .tray-dot, .tray-slot { width: 30px; height: 30px; }
+    .drag-circle-box { width: 180px; height: 180px; grid-template-columns: repeat(3, 40px); gap: 7px; padding: 22px; }
+    .drag-circle-box .cdot { width: 32px !important; height: 32px !important; justify-self: center; align-self: center; }
+    .drag-sources-row { gap: 36px; }
+    .drag-tray { width: 252px; height: 199px; grid-template-columns: repeat(5, 34px); grid-template-rows: repeat(4, 34px); gap: 9px; padding: 18px 22px; align-content: center; justify-content: center; }
+    .tray-dot, .tray-slot { width: 34px; height: 34px; }
     .game-container { padding: 28px 24px; }
     .login-buttons { max-width: 360px; }
     .login-btn { padding: 16px 24px; font-size: 1rem; }
@@ -524,6 +524,7 @@
           <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
           <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
         </svg>
+        <span class="btn-label">드래그로 모으기</span>
       </button>
       <!-- 동그라미 모으기 -->
       <button class="start-btn" onclick="startGame('circleCombine','upto5')">
@@ -541,6 +542,7 @@
           <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
           <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
+        <span class="btn-label">동그라미 맞추기</span>
       </button>
       <!-- 동그라미→숫자 -->
       <button class="start-btn" onclick="startGame('numCombineCircle','upto5')">
@@ -555,6 +557,7 @@
           <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
           <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
         </svg>
+        <span class="btn-label">숫자 맞추기</span>
       </button>
       <!-- 숫자 모으기 -->
       <button class="start-btn" onclick="startGame('numCombine','upto5')">
@@ -569,6 +572,7 @@
           <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
           <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">5</text>
         </svg>
+        <span class="btn-label">숫자 맞추기</span>
       </button>
     </div>
   </div>
@@ -591,6 +595,7 @@
           <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
           <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
         </svg>
+        <span class="btn-label">드래그로 모으기</span>
       </button>
       <button class="start-btn" onclick="startGame('circleCombine','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
@@ -607,6 +612,7 @@
           <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
           <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
+        <span class="btn-label">동그라미 맞추기</span>
       </button>
       <button class="start-btn" onclick="startGame('numCombineCircle','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
@@ -620,6 +626,7 @@
           <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
           <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
         </svg>
+        <span class="btn-label">숫자 맞추기</span>
       </button>
       <button class="start-btn" onclick="startGame('numCombine','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
@@ -633,6 +640,7 @@
           <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
           <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">9</text>
         </svg>
+        <span class="btn-label">숫자 맞추기</span>
       </button>
     </div>
   </div>
@@ -655,6 +663,7 @@
           <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
           <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
         </svg>
+        <span class="btn-label">드래그로 모으기</span>
       </button>
       <button class="start-btn" onclick="startGame('circleCombine','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
@@ -671,6 +680,7 @@
           <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
           <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
+        <span class="btn-label">동그라미 맞추기</span>
       </button>
       <button class="start-btn" onclick="startGame('numCombineCircle','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
@@ -684,6 +694,7 @@
           <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
           <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
         </svg>
+        <span class="btn-label">숫자 맞추기</span>
       </button>
       <button class="start-btn" onclick="startGame('numCombine','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
@@ -697,6 +708,7 @@
           <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
           <text x="35" y="54" font-size="12" font-weight="900" fill="#4A4035" text-anchor="middle">16</text>
         </svg>
+        <span class="btn-label">숫자 맞추기</span>
       </button>
     </div>
   </div>
@@ -1042,11 +1054,11 @@ function renderDragCombineQuestion() {
   let rightDotsHTML = '';
   for (let i = 0; i < q.right; i++) rightDotsHTML += `<div class="cdot green"></div>`;
 
-  const slotsHTML = Array.from({length: maxAnswer}, () => `<div class="tray-slot"></div>`).join('');
+  const slotsHTML = Array.from({length: 20}, () => `<div class="tray-slot"></div>`).join('');
 
   const gc = document.getElementById('game-container');
   gc.innerHTML = `
-    <div class="question-label">큰 원을 파란 칸에 모두 모아봐요!</div>
+    <div class="question-label">작은 원을 파란 공간에 모두 모아보아요!</div>
     <div class="drag-game-wrap">
       <div class="drag-sources-row">
         <div class="drag-circle-box orange-src" data-count="${q.left}" data-color="orange">${leftDotsHTML}</div>
@@ -1062,7 +1074,7 @@ function renderDragCombineQuestion() {
     </div>
     <div class="impulse-msg" id="impulse-msg"></div>`;
 
-  speak(`큰 원을 파란 칸에 모두 모아봐요!`);
+  speak(`작은 원을 파란 공간에 모두 모아보아요!`);
   setupDragCombine(q, answer, choices);
 }
 

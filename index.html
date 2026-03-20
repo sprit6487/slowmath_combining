@@ -201,22 +201,22 @@
 
   /* ===== Circle Combine Mode ===== */
   .circle-box {
-    width: 80px; height: 80px; border: 2.5px solid var(--warm-300); border-radius: 50%;
-    display: grid; grid-template-columns: repeat(3, 12px);
-    gap: 3px; padding: 10px; background: #fff; position: relative;
+    width: 96px; height: 96px; border: 2.5px solid var(--warm-300); border-radius: 50%;
+    display: grid; grid-template-columns: repeat(3, 15px);
+    gap: 4px; padding: 12px; background: #fff; position: relative;
     align-content: center; justify-content: center;
   }
-  .circle-box.top { width: 90px; height: 90px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 12px; display: flex; align-items: center; justify-content: center; }
+  .circle-box.top { width: 108px; height: 108px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 14px; display: flex; align-items: center; justify-content: center; }
   .circle-box.blank { border-style: dashed; border-color: var(--warm-300); background: var(--warm-50); }
   .circle-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
   .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
   .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
-  .cdot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .cdot { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; }
   .cdot.orange { background: var(--app-orange); }
   .cdot.green { background: var(--app-green); }
   .cdot.blue { background: #7EC8E3; }
-  .circle-box.top .cdot { width: 13px; height: 13px; }
+  .circle-box.top .cdot { width: 16px; height: 16px; }
 
   /* Choices */
   .choices-grid {
@@ -327,10 +327,10 @@
     .hint-dot { width: 10px; height: 10px; }
     .choice-btn { padding: 12px; font-size: 1.4rem; border-radius: 12px; }
     .choices-grid { gap: 8px; max-width: 240px; }
-    .circle-box { width: 64px; height: 64px; padding: 8px; }
-    .circle-box.top { width: 72px; height: 72px; padding: 10px; }
-    .cdot { width: 10px; height: 10px; }
-    .circle-box.top .cdot { width: 11px; height: 11px; }
+    .circle-box { width: 76px; height: 76px; padding: 10px; grid-template-columns: repeat(3, 13px); }
+    .circle-box.top { width: 86px; height: 86px; padding: 12px; }
+    .cdot { width: 13px; height: 13px; }
+    .circle-box.top .cdot { width: 14px; height: 14px; }
     .circle-choice-btn { padding: 8px; min-height: 46px; }
     .circle-choice-btn .cdot { width: 12px; height: 12px; }
     .game-container { padding: 16px 12px; border-radius: 16px; }
@@ -352,11 +352,10 @@
     .hint-dots { gap: 5px; }
     .choice-btn { padding: 20px; font-size: 2.1rem; }
     .choices-grid { max-width: 320px; gap: 14px; }
-    .circle-box { width: 96px; height: 96px; padding: 14px; }
-    .circle-box.top { width: 106px; height: 106px; padding: 16px; }
-    .circle-box.top { width: 106px; height: 106px; padding: 16px; }
-    .cdot { width: 14px; height: 14px; }
-    .circle-box.top .cdot { width: 15px; height: 15px; }
+    .circle-box { width: 112px; height: 112px; padding: 16px; grid-template-columns: repeat(3, 17px); }
+    .circle-box.top { width: 124px; height: 124px; padding: 18px; }
+    .cdot { width: 17px; height: 17px; }
+    .circle-box.top .cdot { width: 18px; height: 18px; }
     .circle-choice-btn .cdot { width: 16px; height: 16px; }
     .game-container { padding: 28px 24px; }
     .login-buttons { max-width: 360px; }

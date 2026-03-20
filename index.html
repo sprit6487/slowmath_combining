@@ -178,7 +178,7 @@
   /* ===== Combine Triangle ===== */
   .triangle-wrap { display: flex; flex-direction: column; align-items: center; margin: 8px 0 16px; }
   .tri-top-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
-  .tri-bottom { display: flex; gap: 32px; justify-content: center; }
+  .tri-bottom { display: flex; gap: 32px; justify-content: center; align-items: flex-end; }
   .tri-bottom-section { display: flex; flex-direction: column; align-items: center; }
   .tri-arrows { display: flex; justify-content: center; margin: 4px 0; }
   .tri-box {
@@ -201,22 +201,22 @@
 
   /* ===== Circle Combine Mode ===== */
   .circle-box {
-    width: 96px; height: 96px; border: 2.5px solid var(--warm-300); border-radius: 50%;
-    display: grid; grid-template-columns: repeat(3, 15px);
-    gap: 4px; padding: 12px; background: #fff; position: relative;
+    width: 120px; height: 120px; border: 2.5px solid var(--warm-300); border-radius: 50%;
+    display: grid; grid-template-columns: repeat(3, 19px);
+    gap: 5px; padding: 14px; background: #fff; position: relative;
     align-content: center; justify-content: center;
   }
-  .circle-box.top { width: 108px; height: 108px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 14px; display: flex; align-items: center; justify-content: center; }
+  .circle-box.top { width: 120px; height: 120px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 14px; display: flex; align-items: center; justify-content: center; }
   .circle-box.blank { border-style: dashed; border-color: var(--warm-300); background: var(--warm-50); }
   .circle-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
   .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
   .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
-  .cdot { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; }
+  .cdot { width: 19px; height: 19px; border-radius: 50%; flex-shrink: 0; }
   .cdot.orange { background: var(--app-orange); }
   .cdot.green { background: var(--app-green); }
   .cdot.blue { background: #7EC8E3; }
-  .circle-box.top .cdot { width: 16px; height: 16px; }
+  .circle-box.top .cdot { width: 20px; height: 20px; }
 
   /* Choices */
   .choices-grid {
@@ -262,9 +262,9 @@
   .drag-item-ghost { position: fixed; pointer-events: none; z-index: 9999; border-radius: 50%; opacity: 0.85; }
   .drag-item-ghost.orange { background: var(--app-orange); }
   .drag-item-ghost.green { background: var(--app-green); }
-  .drag-tray { width: 166px; min-height: 64px; border: 2.5px dashed #6BADE8; border-radius: 16px; background: #EEF6FD; display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; justify-content: flex-start; align-content: flex-start; align-items: flex-start; position: relative; }
-  .drag-hint-txt { font-size: 0.8rem; color: #6BADE8; font-weight: 600; pointer-events: none; width: 100%; text-align: center; }
-  .tray-dot { width: 22px; height: 22px; border-radius: 50%; animation: popIn 0.2s ease; flex-shrink: 0; }
+  .drag-tray { width: 166px; min-height: 64px; border: 2.5px dashed #6BADE8; border-radius: 16px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 22px); grid-auto-rows: 22px; gap: 8px; padding: 10px 12px; align-content: start; position: relative; }
+  .drag-hint-txt { font-size: 0.8rem; color: #6BADE8; font-weight: 600; pointer-events: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .tray-dot { width: 22px; height: 22px; border-radius: 50%; animation: popIn 0.2s ease; }
   .tray-dot.blue { background: #6BADE8; }
 
   /* Reveal button */
@@ -327,10 +327,10 @@
     .hint-dot { width: 10px; height: 10px; }
     .choice-btn { padding: 12px; font-size: 1.4rem; border-radius: 12px; }
     .choices-grid { gap: 8px; max-width: 240px; }
-    .circle-box { width: 76px; height: 76px; padding: 10px; grid-template-columns: repeat(3, 13px); }
-    .circle-box.top { width: 86px; height: 86px; padding: 12px; }
-    .cdot { width: 13px; height: 13px; }
-    .circle-box.top .cdot { width: 14px; height: 14px; }
+    .circle-box { width: 96px; height: 96px; padding: 12px; grid-template-columns: repeat(3, 16px); }
+    .circle-box.top { width: 96px; height: 96px; padding: 12px; }
+    .cdot { width: 16px; height: 16px; }
+    .circle-box.top .cdot { width: 17px; height: 17px; }
     .circle-choice-btn { padding: 8px; min-height: 46px; }
     .circle-choice-btn .cdot { width: 12px; height: 12px; }
     .game-container { padding: 16px 12px; border-radius: 16px; }
@@ -352,10 +352,10 @@
     .hint-dots { gap: 5px; }
     .choice-btn { padding: 20px; font-size: 2.1rem; }
     .choices-grid { max-width: 320px; gap: 14px; }
-    .circle-box { width: 112px; height: 112px; padding: 16px; grid-template-columns: repeat(3, 17px); }
-    .circle-box.top { width: 124px; height: 124px; padding: 18px; }
-    .cdot { width: 17px; height: 17px; }
-    .circle-box.top .cdot { width: 18px; height: 18px; }
+    .circle-box { width: 140px; height: 140px; padding: 18px; grid-template-columns: repeat(3, 22px); }
+    .circle-box.top { width: 140px; height: 140px; padding: 18px; }
+    .cdot { width: 22px; height: 22px; }
+    .circle-box.top .cdot { width: 23px; height: 23px; }
     .circle-choice-btn .cdot { width: 16px; height: 16px; }
     .game-container { padding: 28px 24px; }
     .login-buttons { max-width: 360px; }
@@ -410,7 +410,7 @@
 <div class="app">
 
 <!-- ===== Login View ===== -->
-<div id="login-view" class="login-view">
+<div id="login-view" class="login-view hidden">
   <div class="login-logo-area">
     <div class="turtle-svg">
       <svg viewBox="0 0 120 100" width="120" height="100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1392,10 +1392,11 @@ function applyImpulse(btnSelector) {
 
 // ===== Init =====
 window.addEventListener('DOMContentLoaded', () => {
+  checkLogin();
   const splash = document.getElementById('splash');
   setTimeout(() => {
     splash.classList.add('fade-out');
-    setTimeout(() => { splash.remove(); checkLogin(); }, 500);
+    setTimeout(() => { splash.remove(); }, 500);
   }, 1800);
 });
 </script>

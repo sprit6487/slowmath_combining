@@ -250,21 +250,21 @@
   .choices-grid.chips-locked .circle-choice-btn { pointer-events: none; opacity: 0.4; }
 
   /* ===== Drag Combine Mode ===== */
-  .drag-game-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 8px 0 14px; }
-  .drag-sources-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-  .drag-src-box { display: grid; grid-template-columns: repeat(5, 22px); gap: 5px; padding: 7px 9px; border: 2px solid; border-radius: 12px; justify-items: start; align-content: start; }
-  .drag-src-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
-  .drag-src-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
-  .drag-item { width: 22px; height: 22px; border-radius: 50%; cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
-  .drag-item.orange { background: var(--app-orange); }
-  .drag-item.green { background: var(--app-green); }
-  .drag-item.drag-item-held { opacity: 0.2; }
-  .drag-item-ghost { position: fixed; pointer-events: none; z-index: 9999; border-radius: 50%; opacity: 0.85; }
-  .drag-item-ghost.orange { background: var(--app-orange); }
-  .drag-item-ghost.green { background: var(--app-green); }
-  .drag-tray { width: 166px; min-height: 64px; border: 2.5px dashed #6BADE8; border-radius: 16px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 22px); grid-auto-rows: 22px; gap: 8px; padding: 10px 12px; align-content: start; position: relative; }
-  .drag-hint-txt { font-size: 0.8rem; color: #6BADE8; font-weight: 600; pointer-events: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .tray-dot { width: 22px; height: 22px; border-radius: 50%; animation: popIn 0.2s ease; }
+  .drag-game-wrap { display: flex; flex-direction: column; align-items: center; gap: 24px; margin: 16px 0 20px; }
+  .drag-sources-row { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  .drag-circle-box {
+    width: 160px; height: 160px; border: 2.5px solid; border-radius: 50%;
+    display: grid; grid-template-columns: repeat(3, 26px);
+    gap: 6px; padding: 20px; position: relative;
+    align-content: center; justify-content: center;
+  }
+  .drag-circle-box .cdot { width: 26px !important; height: 26px !important; }
+  .drag-circle-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
+  .drag-circle-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
+  .drag-circle-box .cdot { cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
+  .drag-tray { width: 222px; min-height: 100px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 30px); grid-auto-rows: 30px; gap: 8px; padding: 16px 20px; align-content: start; position: relative; }
+  .drag-hint-txt { font-size: 1rem; color: #6BADE8; font-weight: 600; pointer-events: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .tray-dot { width: 30px; height: 30px; border-radius: 50%; animation: popIn 0.2s ease; }
   .tray-dot.blue { background: #6BADE8; }
 
   /* Reveal button */
@@ -501,12 +501,16 @@
       <!-- 드래그 모으기 -->
       <button class="start-btn" onclick="startGame('dragCombine','upto5')">
         <svg width="56" height="50" viewBox="0 0 70 62">
-          <circle cx="18" cy="31" r="17" fill="#FFF6EB" stroke="#F0A050" stroke-width="2"/>
-          <circle cx="11" cy="26" r="4" fill="#F0A050"/>
-          <circle cx="25" cy="26" r="4" fill="#F0A050"/>
-          <circle cx="18" cy="37" r="4" fill="#F0A050"/>
-          <circle cx="52" cy="31" r="17" fill="#EDFAF4" stroke="#5BC886" stroke-width="2"/>
-          <circle cx="52" cy="31" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
+          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
+          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
+          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
+          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
         </svg>
       </button>
       <!-- 동그라미 모으기 -->
@@ -564,14 +568,16 @@
     <div class="mode-btns">
       <button class="start-btn" onclick="startGame('dragCombine','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
-          <circle cx="18" cy="31" r="17" fill="#FFF6EB" stroke="#F0A050" stroke-width="2"/>
-          <circle cx="11" cy="25" r="4" fill="#F0A050"/>
-          <circle cx="25" cy="25" r="4" fill="#F0A050"/>
-          <circle cx="11" cy="37" r="4" fill="#F0A050"/>
-          <circle cx="52" cy="31" r="17" fill="#EDFAF4" stroke="#5BC886" stroke-width="2"/>
-          <circle cx="46" cy="28" r="4" fill="#5BC886"/>
-          <circle cx="58" cy="28" r="4" fill="#5BC886"/>
-          <circle cx="52" cy="38" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
+          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
+          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
+          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
+          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
         </svg>
       </button>
       <button class="start-btn" onclick="startGame('circleCombine','upto9')">
@@ -626,15 +632,16 @@
     <div class="mode-btns">
       <button class="start-btn" onclick="startGame('dragCombine','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
-          <circle cx="18" cy="31" r="17" fill="#FFF6EB" stroke="#F0A050" stroke-width="2"/>
-          <circle cx="11" cy="24" r="4" fill="#F0A050"/>
-          <circle cx="25" cy="24" r="4" fill="#F0A050"/>
-          <circle cx="11" cy="36" r="4" fill="#F0A050"/>
-          <circle cx="25" cy="36" r="4" fill="#F0A050"/>
-          <circle cx="52" cy="31" r="17" fill="#EDFAF4" stroke="#5BC886" stroke-width="2"/>
-          <circle cx="45" cy="25" r="4" fill="#5BC886"/>
-          <circle cx="59" cy="25" r="4" fill="#5BC886"/>
-          <circle cx="45" cy="37" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
+          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
+          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
+          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
+          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
         </svg>
       </button>
       <button class="start-btn" onclick="startGame('circleCombine','unlimited')">
@@ -1018,18 +1025,18 @@ function renderDragCombineQuestion() {
   }
   const choices = shuffle([answer, ...Array.from(wrongs).slice(0, 3)]);
 
-  let leftHTML = '';
-  for (let i = 0; i < q.left; i++) leftHTML += `<div class="drag-item orange" data-color="orange" data-id="l${i}"></div>`;
-  let rightHTML = '';
-  for (let i = 0; i < q.right; i++) rightHTML += `<div class="drag-item green" data-color="green" data-id="r${i}"></div>`;
+  let leftDotsHTML = '';
+  for (let i = 0; i < q.left; i++) leftDotsHTML += `<div class="cdot orange"></div>`;
+  let rightDotsHTML = '';
+  for (let i = 0; i < q.right; i++) rightDotsHTML += `<div class="cdot green"></div>`;
 
   const gc = document.getElementById('game-container');
   gc.innerHTML = `
-    <div class="question-label">동그라미를 파란 칸에 모두 모아봐요!</div>
+    <div class="question-label">큰 원을 파란 칸에 모두 모아봐요!</div>
     <div class="drag-game-wrap">
       <div class="drag-sources-row">
-        <div class="drag-src-box orange-src">${leftHTML}</div>
-        <div class="drag-src-box green-src">${rightHTML}</div>
+        <div class="drag-circle-box orange-src" data-count="${q.left}" data-color="orange">${leftDotsHTML}</div>
+        <div class="drag-circle-box green-src" data-count="${q.right}" data-color="green">${rightDotsHTML}</div>
       </div>
       <div class="drag-tray" id="drag-tray">
         <span class="drag-hint-txt" id="drag-hint">여기에 모아요</span>
@@ -1040,18 +1047,13 @@ function renderDragCombineQuestion() {
     </div>
     <div class="impulse-msg" id="impulse-msg"></div>`;
 
-  speak(`동그라미를 파란 칸에 모두 모아봐요!`);
+  speak(`큰 원을 파란 칸에 모두 모아봐요!`);
   setupDragCombine(q, answer, choices);
 }
 
 function setupDragCombine(q, answer) {
   const tray = document.getElementById('drag-tray');
-  const total = q.left + q.right;
-  let droppedCount = 0;
-
   function onAllDropped() {
-    const hint = document.getElementById('drag-hint');
-    if (hint) hint.remove();
     const choicesEl = document.getElementById('choices-grid');
     if (!choicesEl) return;
     choicesEl.style.display = '';
@@ -1079,46 +1081,54 @@ function setupDragCombine(q, answer) {
     });
   }
 
-  document.querySelectorAll('.drag-item').forEach(item => {
+  const total = q.left + q.right;
+  let droppedCount = 0;
+
+  document.querySelectorAll('.drag-circle-box .cdot').forEach(dot => {
     let ghost = null;
-    item.addEventListener('pointerdown', e => {
-      if (item.dataset.dropped) return;
+    dot.addEventListener('pointerdown', e => {
+      if (dot.dataset.dropped) return;
       e.preventDefault();
-      item.setPointerCapture(e.pointerId);
-      const sz = item.offsetWidth;
+      dot.setPointerCapture(e.pointerId);
+      const sz = dot.offsetWidth;
+      const color = dot.classList.contains('orange')
+        ? getComputedStyle(document.documentElement).getPropertyValue('--app-orange').trim()
+        : getComputedStyle(document.documentElement).getPropertyValue('--app-green').trim();
       ghost = document.createElement('div');
-      ghost.className = `drag-item-ghost ${item.dataset.color}`;
-      ghost.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX - sz/2}px;top:${e.clientY - sz/2}px;`;
+      ghost.style.cssText = `position:fixed;pointer-events:none;z-index:9999;border-radius:50%;width:${sz}px;height:${sz}px;background:${color};opacity:0.85;left:${e.clientX - sz/2}px;top:${e.clientY - sz/2}px;`;
       document.body.appendChild(ghost);
-      item.classList.add('drag-item-held');
+      dot.style.opacity = '0.2';
     });
-    item.addEventListener('pointermove', e => {
+    dot.addEventListener('pointermove', e => {
       if (!ghost) return;
       const sz = ghost.offsetWidth;
       ghost.style.left = (e.clientX - sz/2) + 'px';
       ghost.style.top = (e.clientY - sz/2) + 'px';
     });
-    item.addEventListener('pointerup', e => {
+    dot.addEventListener('pointerup', e => {
       if (!ghost) return;
       const trayRect = tray.getBoundingClientRect();
       const over = e.clientX >= trayRect.left && e.clientX <= trayRect.right &&
                    e.clientY >= trayRect.top  && e.clientY <= trayRect.bottom;
       ghost.remove(); ghost = null;
-      item.classList.remove('drag-item-held');
-      if (over && !item.dataset.dropped) {
-        item.dataset.dropped = '1';
-        item.style.opacity = '0';
-        item.style.pointerEvents = 'none';
-        const dot = document.createElement('div');
-        dot.className = 'tray-dot blue';
-        tray.appendChild(dot);
+      if (over && !dot.dataset.dropped) {
+        dot.dataset.dropped = '1';
+        dot.style.opacity = '0';
+        dot.style.pointerEvents = 'none';
+        const hint = document.getElementById('drag-hint');
+        if (hint) hint.remove();
+        const trayDot = document.createElement('div');
+        trayDot.className = 'tray-dot blue';
+        tray.appendChild(trayDot);
         droppedCount++;
         if (droppedCount >= total) setTimeout(onAllDropped, 200);
+      } else {
+        dot.style.opacity = '1';
       }
     });
-    item.addEventListener('pointercancel', () => {
+    dot.addEventListener('pointercancel', () => {
       if (ghost) { ghost.remove(); ghost = null; }
-      item.classList.remove('drag-item-held');
+      dot.style.opacity = '1';
     });
   });
 }

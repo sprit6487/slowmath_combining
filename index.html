@@ -94,7 +94,7 @@
   .mode-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
   .mode-card h2 { font-size: 1.05rem; font-weight: 700; color: var(--warm-700); margin-bottom: 4px; }
   .mode-card .desc { font-size: 0.75rem; color: var(--warm-400); margin-bottom: 14px; }
-  .mode-btns { display: flex; gap: 6px; justify-content: center; }
+  .mode-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
   .start-btn {
     padding: 10px 6px; border: 2px solid var(--border);
     border-radius: 12px; background: #fff;
@@ -194,7 +194,7 @@
   .tri-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
 
   /* Hint dots */
-  .hint-dots { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; max-width: 120px; min-height: 16px; margin: 4px 0; }
+  .hint-dots { display: grid; grid-template-columns: repeat(5, 12px); gap: 4px; min-height: 16px; margin: 4px 0; }
   .hint-dot { width: 12px; height: 12px; border-radius: 50%; opacity: 0.7; }
   .hint-dot.orange { background: var(--app-orange); }
   .hint-dot.green { background: var(--app-green); }
@@ -202,10 +202,11 @@
   /* ===== Circle Combine Mode ===== */
   .circle-box {
     width: 80px; height: 80px; border: 2.5px solid var(--warm-300); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-wrap: wrap; gap: 3px; padding: 10px; background: #fff; position: relative;
+    display: grid; grid-template-columns: repeat(3, 12px);
+    gap: 3px; padding: 10px; background: #fff; position: relative;
+    align-content: center; justify-content: center;
   }
-  .circle-box.top { width: 90px; height: 90px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 12px; }
+  .circle-box.top { width: 90px; height: 90px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 12px; display: flex; align-items: center; justify-content: center; }
   .circle-box.blank { border-style: dashed; border-color: var(--warm-300); background: var(--warm-50); }
   .circle-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
@@ -247,6 +248,24 @@
   .circle-choice-btn .cdot { width: 14px; height: 14px; }
   .choices-grid.chips-hidden .circle-choice-btn { visibility: hidden; }
   .choices-grid.chips-locked .circle-choice-btn { pointer-events: none; opacity: 0.4; }
+
+  /* ===== Drag Combine Mode ===== */
+  .drag-game-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 8px 0 14px; }
+  .drag-sources-row { display: flex; gap: 12px; justify-content: center; }
+  .drag-src-box { display: grid; grid-template-columns: repeat(5, 28px); gap: 6px; padding: 8px 10px; border: 2px solid; border-radius: 12px; justify-items: start; align-content: start; }
+  .drag-src-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
+  .drag-src-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
+  .drag-item { width: 28px; height: 28px; border-radius: 50%; cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; }
+  .drag-item.orange { background: var(--app-orange); }
+  .drag-item.green { background: var(--app-green); }
+  .drag-item.drag-item-held { opacity: 0.2; }
+  .drag-item-ghost { position: fixed; pointer-events: none; z-index: 9999; border-radius: 50%; opacity: 0.85; }
+  .drag-item-ghost.orange { background: var(--app-orange); }
+  .drag-item-ghost.green { background: var(--app-green); }
+  .drag-tray { width: 212px; min-height: 64px; border: 2.5px dashed #6BADE8; border-radius: 16px; background: #EEF6FD; display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; justify-content: flex-start; align-content: flex-start; align-items: flex-start; position: relative; }
+  .drag-hint-txt { font-size: 0.8rem; color: #6BADE8; font-weight: 600; pointer-events: none; width: 100%; text-align: center; }
+  .tray-dot { width: 28px; height: 28px; border-radius: 50%; animation: popIn 0.2s ease; flex-shrink: 0; }
+  .tray-dot.blue { background: #6BADE8; }
 
   /* Reveal button */
   .reveal-btn-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; }
@@ -296,14 +315,15 @@
     .brand-sub { margin-bottom: 16px; }
     .mode-card { padding: 14px 12px; border-radius: 16px; }
     .mode-card h2 { font-size: 0.95rem; }
-    .mode-btns { gap: 4px; }
+    .mode-btns { gap: 4px; grid-template-columns: 1fr 1fr; }
     .start-btn { padding: 7px 4px; }
     .tri-box { width: 52px; height: 52px; font-size: 1.4rem; border-radius: 10px; }
     .tri-box.top { width: 58px; height: 58px; font-size: 1.6rem; }
     .tri-box.blank { font-size: 1.2rem; }
     .tri-arrows svg { width: 130px; }
     .tri-bottom { gap: 20px; }
-    .hint-dots { max-width: 90px; }
+    .hint-dot { width: 10px; height: 10px; }
+    .hint-dots { grid-template-columns: repeat(5, 10px); }
     .hint-dot { width: 10px; height: 10px; }
     .choice-btn { padding: 12px; font-size: 1.4rem; border-radius: 12px; }
     .choices-grid { gap: 8px; max-width: 240px; }
@@ -329,10 +349,11 @@
     .tri-box.top { width: 84px; height: 84px; font-size: 2.4rem; }
     .tri-bottom { gap: 48px; }
     .hint-dot { width: 14px; height: 14px; }
-    .hint-dots { max-width: 150px; gap: 5px; }
+    .hint-dots { gap: 5px; }
     .choice-btn { padding: 20px; font-size: 2.1rem; }
     .choices-grid { max-width: 320px; gap: 14px; }
     .circle-box { width: 96px; height: 96px; padding: 14px; }
+    .circle-box.top { width: 106px; height: 106px; padding: 16px; }
     .circle-box.top { width: 106px; height: 106px; padding: 16px; }
     .cdot { width: 14px; height: 14px; }
     .circle-box.top .cdot { width: 15px; height: 15px; }
@@ -478,91 +499,128 @@
     <h2>합이 5 이하</h2>
     <p class="desc">두 수를 모아 5 이하의 합을 만드는 연습이에요</p>
     <div class="mode-btns">
+      <!-- 드래그 모으기 -->
+      <button class="start-btn" onclick="startGame('dragCombine','upto5')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
+          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
+          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
+          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
+          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
+        </svg>
+      </button>
       <!-- 동그라미 모으기 -->
       <button class="start-btn" onclick="startGame('circleCombine','upto5')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ccA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA1)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA1)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA1)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA1)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="23" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="31" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
       </button>
       <!-- 동그라미→숫자 -->
       <button class="start-btn" onclick="startGame('numCombineCircle','upto5')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ncCA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA1)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA1)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA1)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA1)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
         </svg>
       </button>
       <!-- 숫자 모으기 -->
       <button class="start-btn" onclick="startGame('numCombine','upto5')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ncA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA1)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA1)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <text x="13" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">2</text>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <text x="56" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">3</text>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="14" y="16" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">2</text>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <text x="56" y="16" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">3</text>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA1)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA1)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">5</text>
         </svg>
       </button>
     </div>
   </div>
 
-  <!-- Mode 2: 합이 9 이하 -->
+  <!-- Mode 2: 합이 10 이하 -->
   <div class="mode-card">
-    <h2>합이 9 이하</h2>
-    <p class="desc">두 수를 모아 9 이하의 합을 만드는 연습이에요</p>
+    <h2>합이 10 이하</h2>
+    <p class="desc">두 수를 모아 10 이하의 합을 만드는 연습이에요</p>
     <div class="mode-btns">
+      <button class="start-btn" onclick="startGame('dragCombine','upto9')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
+          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
+          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
+          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
+          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
+        </svg>
+      </button>
       <button class="start-btn" onclick="startGame('circleCombine','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ccA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA2)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA2)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA2)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA2)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="23" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="31" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
       </button>
       <button class="start-btn" onclick="startGame('numCombineCircle','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ncCA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA2)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA2)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA2)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA2)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
         </svg>
       </button>
       <button class="start-btn" onclick="startGame('numCombine','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ncA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA2)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA2)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <text x="13" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <text x="56" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">5</text>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="14" y="16" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <text x="56" y="16" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">5</text>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA2)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA2)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">9</text>
         </svg>
       </button>
     </div>
@@ -570,45 +628,63 @@
 
   <!-- Mode 3: 제한 없음 -->
   <div class="mode-card">
-    <h2>제한 없음</h2>
-    <p class="desc">더 큰 수까지 모으는 연습이에요</p>
+    <h2>합 제한 없음</h2>
+    <p class="desc">두 수를 모아 10을 넘을 수 있어요</p>
     <div class="mode-btns">
+      <button class="start-btn" onclick="startGame('dragCombine','unlimited')">
+        <svg width="56" height="50" viewBox="0 0 70 62">
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
+          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
+          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
+          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
+          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
+        </svg>
+      </button>
       <button class="start-btn" onclick="startGame('circleCombine','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ccA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA3)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA3)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA3)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ccA3)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="23" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="31" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
       </button>
       <button class="start-btn" onclick="startGame('numCombineCircle','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ncCA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA3)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA3)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="7" cy="48" r="4" fill="#F0A050"/><circle cx="18" cy="48" r="4" fill="#F0A050"/>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <circle cx="51" cy="48" r="4" fill="#5BC886"/><circle cx="61" cy="48" r="4" fill="#5BC886"/>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA3)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncCA3)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="35" y="54" font-size="14" font-weight="900" fill="#4A4035" text-anchor="middle">4</text>
         </svg>
       </button>
       <button class="start-btn" onclick="startGame('numCombine','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
           <defs><marker id="ncA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
-          <rect x="16" y="0" width="38" height="26" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5" stroke-dasharray="3 2"/>
-          <text x="35" y="19" font-size="14" font-weight="900" fill="#F0A050" text-anchor="middle">?</text>
-          <line x1="12" y1="36" x2="24" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA3)"/>
-          <line x1="58" y1="36" x2="46" y2="26" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA3)"/>
-          <rect x="0" y="36" width="26" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <text x="13" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">7</text>
-          <rect x="44" y="36" width="24" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
-          <text x="56" y="53" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">9</text>
+          <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="14" y="16" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">7</text>
+          <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
+          <text x="56" y="16" font-size="13" font-weight="900" fill="#4A4035" text-anchor="middle">9</text>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA3)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#ncA3)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
+          <text x="35" y="54" font-size="12" font-weight="900" fill="#4A4035" text-anchor="middle">16</text>
         </svg>
       </button>
     </div>
@@ -710,7 +786,7 @@ const WN_KEY      = 'slowmath_combining_wrong_notes';
 
 const MODES = {
   upto5:     { label: '합이 5 이하',  maxTotal: 5 },
-  upto9:     { label: '합이 9 이하',  maxTotal: 9 },
+  upto9:     { label: '합이 10 이하', maxTotal: 10 },
   unlimited: { label: '제한 없음',    maxTotal: 18 }
 };
 
@@ -804,11 +880,20 @@ function shuffle(arr) {
 }
 
 function generateQuestions(mKey) {
-  const maxTotal = MODES[mKey].maxTotal;
   const qs = [];
-  for (let total = 2; total <= maxTotal; total++) {
-    for (let left = 1; left < total; left++) {
-      qs.push({ total, left, right: total - left });
+  if (mKey === 'unlimited') {
+    // 각 수는 1~9, 합은 제한 없음
+    for (let left = 1; left <= 9; left++) {
+      for (let right = 1; right <= 9; right++) {
+        qs.push({ total: left + right, left, right });
+      }
+    }
+  } else {
+    const maxTotal = MODES[mKey].maxTotal;
+    for (let total = 2; total <= maxTotal; total++) {
+      for (let left = 1; left < total; left++) {
+        qs.push({ total, left, right: total - left });
+      }
     }
   }
   return shuffle(qs);
@@ -901,7 +986,8 @@ function nextQuestion() {
   locked = false;
   if (impulseTimer) { clearInterval(impulseTimer); impulseTimer = null; }
   if (questionNum > questions.length) { showComplete(); return; }
-  if (gameType === 'numCombine') renderNumCombineQuestion();
+  if (gameType === 'dragCombine') renderDragCombineQuestion();
+  else if (gameType === 'numCombine') renderNumCombineQuestion();
   else if (gameType === 'numCombineCircle') renderNumCombineCircleQuestion();
   else renderCircleCombineQuestion();
   updateScoreUI();
@@ -927,14 +1013,132 @@ function showComplete() {
   document.getElementById('home-btn').addEventListener('click', goHome);
 }
 
+// ===== Mode 4: 드래그 모으기 (dragCombine) =====
+function renderDragCombineQuestion() {
+  const q = questions[questionNum - 1];
+  const answer = q.total;
+  const maxAnswer = MODES[modeKey]?.maxTotal ?? 18;
+
+  const wrongs = new Set();
+  while (wrongs.size < 3) {
+    const w = Math.max(2, answer + (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 3) + 1));
+    if (w !== answer && w >= 2 && w <= maxAnswer + 5) wrongs.add(w);
+  }
+  const choices = shuffle([answer, ...Array.from(wrongs).slice(0, 3)]);
+
+  let leftHTML = '';
+  for (let i = 0; i < q.left; i++) leftHTML += `<div class="drag-item orange" data-color="orange" data-id="l${i}"></div>`;
+  let rightHTML = '';
+  for (let i = 0; i < q.right; i++) rightHTML += `<div class="drag-item green" data-color="green" data-id="r${i}"></div>`;
+
+  const gc = document.getElementById('game-container');
+  gc.innerHTML = `
+    <div class="question-label">동그라미를 파란 칸에 모두 모아봐요!</div>
+    <div class="drag-game-wrap">
+      <div class="drag-sources-row">
+        <div class="drag-src-box orange-src">${leftHTML}</div>
+        <div class="drag-src-box green-src">${rightHTML}</div>
+      </div>
+      <div class="drag-tray" id="drag-tray">
+        <span class="drag-hint-txt" id="drag-hint">여기에 모아요</span>
+      </div>
+    </div>
+    <div class="choices-grid" id="choices-grid" style="display:none;">
+      ${choices.map(c => `<button class="choice-btn" data-val="${c}">${c}</button>`).join('')}
+    </div>
+    <div class="impulse-msg" id="impulse-msg"></div>`;
+
+  speak(`동그라미를 파란 칸에 모두 모아봐요!`);
+  setupDragCombine(q, answer, choices);
+}
+
+function setupDragCombine(q, answer) {
+  const tray = document.getElementById('drag-tray');
+  const total = q.left + q.right;
+  let droppedCount = 0;
+
+  function onAllDropped() {
+    const hint = document.getElementById('drag-hint');
+    if (hint) hint.remove();
+    const choicesEl = document.getElementById('choices-grid');
+    if (!choicesEl) return;
+    choicesEl.style.display = '';
+    speak('몇 개인지 골라봐요!');
+    applyImpulse('.choice-btn');
+    choicesEl.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (locked) return;
+        const val = parseInt(btn.dataset.val);
+        if (val === answer) {
+          locked = true;
+          btn.classList.add('correct');
+          combo++; correctCount++;
+          showFeedback('🎉'); speak('정답이에요!');
+          if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
+          updateScoreUI();
+          setTimeout(() => nextQuestion(), 900);
+        } else {
+          btn.classList.add('wrong'); btn.disabled = true;
+          combo = 0;
+          if (!isWrongNotesPractice) addWrongNote(`${q.left}-${q.right}-${q.total}`, q);
+          showFeedback('😢'); speak('다시 해봐요.');
+        }
+      });
+    });
+  }
+
+  document.querySelectorAll('.drag-item').forEach(item => {
+    let ghost = null;
+    item.addEventListener('pointerdown', e => {
+      if (item.dataset.dropped) return;
+      e.preventDefault();
+      item.setPointerCapture(e.pointerId);
+      const sz = item.offsetWidth;
+      ghost = document.createElement('div');
+      ghost.className = `drag-item-ghost ${item.dataset.color}`;
+      ghost.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX - sz/2}px;top:${e.clientY - sz/2}px;`;
+      document.body.appendChild(ghost);
+      item.classList.add('drag-item-held');
+    });
+    item.addEventListener('pointermove', e => {
+      if (!ghost) return;
+      const sz = ghost.offsetWidth;
+      ghost.style.left = (e.clientX - sz/2) + 'px';
+      ghost.style.top = (e.clientY - sz/2) + 'px';
+    });
+    item.addEventListener('pointerup', e => {
+      if (!ghost) return;
+      const trayRect = tray.getBoundingClientRect();
+      const over = e.clientX >= trayRect.left && e.clientX <= trayRect.right &&
+                   e.clientY >= trayRect.top  && e.clientY <= trayRect.bottom;
+      ghost.remove(); ghost = null;
+      item.classList.remove('drag-item-held');
+      if (over && !item.dataset.dropped) {
+        item.dataset.dropped = '1';
+        item.style.opacity = '0';
+        item.style.pointerEvents = 'none';
+        const dot = document.createElement('div');
+        dot.className = 'tray-dot blue';
+        tray.appendChild(dot);
+        droppedCount++;
+        if (droppedCount >= total) setTimeout(onAllDropped, 200);
+      }
+    });
+    item.addEventListener('pointercancel', () => {
+      if (ghost) { ghost.remove(); ghost = null; }
+      item.classList.remove('drag-item-held');
+    });
+  });
+}
+
 // ===== Combining Triangle Render =====
-// Layout: top = blank (answer), bottom-left & bottom-right = given
-// Arrows point UPWARD from bottom boxes to top box
+// Layout: top = given values (left, right), bottom = blank answer
+// Arrows point DOWNWARD from top boxes to bottom box
 function combineArrowsSVG() {
   return `<svg width="160" height="36" viewBox="0 0 160 36">
-    <defs><marker id="arrowUp" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7" fill="none" stroke="#B8AD9E" stroke-width="1.2"/></marker></defs>
-    <line x1="30" y1="30" x2="60" y2="4" stroke="#B8AD9E" stroke-width="2" marker-end="url(#arrowUp)"/>
-    <line x1="130" y1="30" x2="100" y2="4" stroke="#B8AD9E" stroke-width="2" marker-end="url(#arrowUp)"/>
+    <defs><marker id="arrowDown" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7" fill="none" stroke="#B8AD9E" stroke-width="1.2"/></marker></defs>
+    <line x1="30" y1="4" x2="66" y2="30" stroke="#B8AD9E" stroke-width="2" marker-end="url(#arrowDown)"/>
+    <line x1="130" y1="4" x2="94" y2="30" stroke="#B8AD9E" stroke-width="2" marker-end="url(#arrowDown)"/>
   </svg>`;
 }
 
@@ -966,10 +1170,6 @@ function renderNumCombineQuestion() {
   gc.innerHTML = `
     <div class="question-label">${q.left} + ${q.right} 를 모으면 몇이 될까요?</div>
     <div class="triangle-wrap">
-      <div class="tri-top-section">
-        <div class="tri-box top blank" id="tri-top">?</div>
-      </div>
-      <div class="tri-arrows">${combineArrowsSVG()}</div>
       <div class="tri-bottom">
         <div class="tri-bottom-section">
           ${leftHint}
@@ -979,6 +1179,10 @@ function renderNumCombineQuestion() {
           ${rightHint}
           <div class="tri-box right-box">${q.right}</div>
         </div>
+      </div>
+      <div class="tri-arrows">${combineArrowsSVG()}</div>
+      <div class="tri-top-section">
+        <div class="tri-box top blank" id="tri-top">?</div>
       </div>
     </div>
     <div class="choices-grid" id="choices-grid">
@@ -1040,10 +1244,6 @@ function renderNumCombineCircleQuestion() {
   gc.innerHTML = `
     <div class="question-label">동그라미를 모으면 몇 개가 될까요?</div>
     <div class="triangle-wrap">
-      <div class="tri-top-section">
-        <div class="tri-box top blank" id="tri-top">?</div>
-      </div>
-      <div class="tri-arrows">${combineArrowsSVG()}</div>
       <div class="tri-bottom">
         <div class="tri-bottom-section">
           <div class="circle-box left-box">${renderCircleDots(q.left, 'orange')}</div>
@@ -1051,6 +1251,10 @@ function renderNumCombineCircleQuestion() {
         <div class="tri-bottom-section">
           <div class="circle-box right-box">${renderCircleDots(q.right, 'green')}</div>
         </div>
+      </div>
+      <div class="tri-arrows">${combineArrowsSVG()}</div>
+      <div class="tri-top-section">
+        <div class="tri-box top blank" id="tri-top">?</div>
       </div>
     </div>
     <div class="choices-grid" id="choices-grid">
@@ -1106,10 +1310,6 @@ function renderCircleCombineQuestion() {
   gc.innerHTML = `
     <div class="question-label">동그라미를 모으면 몇 개가 될까요?</div>
     <div class="triangle-wrap">
-      <div class="tri-top-section">
-        <div class="circle-box top blank" id="circle-top"><span style="font-size:1.4rem;font-weight:700;color:var(--warm-400);">?</span></div>
-      </div>
-      <div class="tri-arrows">${combineArrowsSVG()}</div>
       <div class="tri-bottom">
         <div class="tri-bottom-section">
           <div class="circle-box left-box">${renderCircleDots(q.left, 'orange')}</div>
@@ -1117,6 +1317,10 @@ function renderCircleCombineQuestion() {
         <div class="tri-bottom-section">
           <div class="circle-box right-box">${renderCircleDots(q.right, 'green')}</div>
         </div>
+      </div>
+      <div class="tri-arrows">${combineArrowsSVG()}</div>
+      <div class="tri-top-section">
+        <div class="circle-box top blank" id="circle-top"><span style="font-size:1.4rem;font-weight:700;color:var(--warm-400);">?</span></div>
       </div>
     </div>
     <div class="choices-grid" id="choices-grid">

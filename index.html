@@ -237,8 +237,8 @@
   /* ===== Circle Combine Mode ===== */
   .circle-box {
     width: 148px; height: 148px; border: 2.5px solid var(--warm-300); border-radius: 20px;
-    display: grid; grid-template-columns: repeat(3, 26px);
-    gap: 6px; padding: 18px; background: #fff; position: relative;
+    display: grid; grid-template-columns: repeat(3, 32px);
+    gap: 6px; padding: 12px; background: #fff; position: relative;
     align-content: center; justify-content: center;
   }
   .circle-box.top { width: 148px; height: 148px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 18px; display: flex; align-items: center; justify-content: center; }
@@ -247,7 +247,7 @@
   .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
   .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
   .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
-  .cdot { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
+  .cdot { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
   .cdot.orange { background: var(--app-orange); }
   .cdot.green { background: var(--app-green); }
   .cdot.blue { background: #7EC8E3; }
@@ -366,12 +366,12 @@
     .hint-dot { width: 10px; height: 10px; }
     .choice-btn { padding: 12px; font-size: 1.4rem; border-radius: 12px; }
     .choices-grid { gap: 8px; max-width: 240px; }
-    .circle-box { width: 130px; height: 130px; padding: 14px; grid-template-columns: repeat(3, 22px); gap: 5px; }
-    .circle-box.top { width: 130px; height: 130px; padding: 14px; }
-    .cdot { width: 22px; height: 22px; }
-    .circle-box.top .cdot { width: 23px; height: 23px; }
+    .circle-box { width: 130px; height: 130px; padding: 8px; grid-template-columns: repeat(3, 28px); gap: 5px; }
+    .circle-box.top { width: 130px; height: 130px; padding: 8px; }
+    .cdot { width: 28px; height: 28px; }
+    .circle-box.top .cdot { width: 28px; height: 28px; }
     .circle-choice-btn { padding: 8px; min-height: 46px; }
-    .circle-choice-btn .cdot { width: 18px; height: 18px; }
+    .circle-choice-btn .cdot { width: 20px; height: 20px; }
     .drag-circle-box { gap: 6px; padding: 10px; }
     .drag-sources-row { gap: 6px; }
     .drag-tray { gap: 5px; padding: 10px; }
@@ -394,11 +394,11 @@
     .hint-dots { gap: 5px; }
     .choice-btn { padding: 20px; font-size: 2.1rem; }
     .choices-grid { max-width: 320px; gap: 14px; }
-    .circle-box { width: 180px; height: 180px; padding: 22px; grid-template-columns: repeat(3, 32px); gap: 7px; }
-    .circle-box.top { width: 180px; height: 180px; padding: 22px; }
-    .cdot { width: 22px; height: 22px; }
-    .circle-box.top .cdot { width: 33px; height: 33px; }
-    .circle-choice-btn .cdot { width: 26px; height: 26px; }
+    .circle-box { width: 180px; height: 180px; padding: 14px; grid-template-columns: repeat(3, 36px); gap: 7px; }
+    .circle-box.top { width: 180px; height: 180px; padding: 14px; }
+    .cdot { width: 36px; height: 36px; }
+    .circle-box.top .cdot { width: 38px; height: 38px; }
+    .circle-choice-btn .cdot { width: 28px; height: 28px; }
     .drag-circle-box { gap: 10px; padding: 18px; }
     .drag-sources-row { gap: 12px; }
     .drag-tray { gap: 8px; padding: 14px; }

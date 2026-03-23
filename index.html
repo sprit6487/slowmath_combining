@@ -248,6 +248,7 @@
   .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
   .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
   .cdot { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
+  .cdot.rect { border-radius: 8px; }
   .cdot.orange { background: var(--app-orange); }
   .cdot.green { background: var(--app-green); }
   .cdot.blue { background: #7EC8E3; }
@@ -547,16 +548,18 @@
       <!-- 드래그 모으기 -->
       <button class="start-btn" onclick="startGame('dragCombine','upto5')">
         <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="dcA1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
           <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
-          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
           <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
           <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
-          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
-          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
-          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
-          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
-          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#dcA1)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#dcA1)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="23" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="31" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
         <span class="btn-label">드래그로 모으기</span>
       </button>
@@ -618,16 +621,18 @@
     <div class="mode-btns">
       <button class="start-btn" onclick="startGame('dragCombine','upto9')">
         <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="dcA2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
           <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
-          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
           <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
           <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
-          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
-          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
-          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
-          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
-          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#dcA2)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#dcA2)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="23" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="31" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
         <span class="btn-label">드래그로 모으기</span>
       </button>
@@ -686,16 +691,18 @@
     <div class="mode-btns">
       <button class="start-btn" onclick="startGame('dragCombine','unlimited')">
         <svg width="56" height="50" viewBox="0 0 70 62">
+          <defs><marker id="dcA3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#B8AD9E" stroke-width="1"/></marker></defs>
           <rect x="0" y="0" width="28" height="24" rx="4" fill="#FFF6EB" stroke="#F0A050" stroke-width="1.5"/>
-          <circle cx="9" cy="12" r="4" fill="#F0A050"/>
-          <circle cx="19" cy="12" r="4" fill="#F0A050" opacity="0.2"/>
+          <circle cx="9" cy="12" r="4" fill="#F0A050"/><circle cx="19" cy="12" r="4" fill="#F0A050"/>
           <rect x="42" y="0" width="28" height="24" rx="4" fill="#EDFAF4" stroke="#5BC886" stroke-width="1.5"/>
           <circle cx="51" cy="12" r="4" fill="#5BC886"/><circle cx="61" cy="12" r="4" fill="#5BC886"/>
-          <rect x="4" y="41" width="62" height="21" rx="6" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
-          <circle cx="48" cy="47" r="5" fill="#F0A050"/>
-          <polygon points="52,51 52,59 54.5,57 55.5,60 57,59 56,56 58,56" fill="#7A6E66"/>
-          <circle cx="18" cy="51.5" r="4" fill="#6BADE8"/>
-          <circle cx="28" cy="51.5" r="4" fill="#6BADE8"/><circle cx="38" cy="51.5" r="4" fill="#6BADE8"/>
+          <line x1="14" y1="24" x2="27" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#dcA3)"/>
+          <line x1="56" y1="24" x2="43" y2="37" stroke="#B8AD9E" stroke-width="1" marker-end="url(#dcA3)"/>
+          <rect x="14" y="38" width="42" height="24" rx="5" fill="#EEF6FD" stroke="#6BADE8" stroke-width="1.5"/>
+          <circle cx="23" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="31" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="39" cy="50" r="3.5" fill="#6BADE8"/>
+          <circle cx="47" cy="50" r="3.5" fill="#6BADE8"/>
         </svg>
         <span class="btn-label">드래그로 모으기</span>
       </button>
@@ -1323,7 +1330,7 @@ function renderNumCombineQuestion() {
 // ===== Mode 2: 동그라미→숫자 (numCombineCircle) =====
 function renderCircleDots(count, colorClass) {
   let d = '';
-  for (let i = 0; i < count; i++) d += `<div class="cdot ${colorClass}"></div>`;
+  for (let i = 0; i < count; i++) d += `<div class="cdot rect ${colorClass}"></div>`;
   return d;
 }
 

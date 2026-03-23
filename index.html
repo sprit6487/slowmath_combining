@@ -316,6 +316,8 @@
   .complete-sub { font-size: 0.85rem; color: var(--warm-400); }
   .next-btn { margin-top: 8px; padding: 14px 36px; border: none; border-radius: 12px; background: var(--app-blue); color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: transform 0.12s; }
   .next-btn:active { transform: scale(0.96); }
+  .btn-next-q { display: block; width: 100%; max-width: 360px; margin: 16px auto 0; padding: 14px 0; border-radius: 16px; border: none; background: var(--warm-700); color: white; font-family: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; box-shadow: 0 2px 8px rgba(74,64,53,0.15); }
+  .btn-next-q:active { transform: scale(0.98); background: var(--warm-800); }
 
   /* Feedback */
   .feedback-float { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0); font-size: 64px; z-index: 100; pointer-events: none; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
@@ -828,6 +830,7 @@
   </div>
   <span class="combo-badge" id="combo-badge"></span>
   <div class="game-container" id="game-container"></div>
+  <button class="btn-next-q" id="next-q-btn" style="display:none;" onclick="onNextQ()">다음 문제 →</button>
 </div>
 
 </div><!-- /.app -->
@@ -1038,6 +1041,7 @@ function updateProgress() {
 
 // ===== Next Question =====
 function nextQuestion() {
+  document.getElementById('next-q-btn').style.display='none';
   questionNum++;
   locked = false;
   if (impulseTimer) { clearInterval(impulseTimer); impulseTimer = null; }
@@ -1047,6 +1051,11 @@ function nextQuestion() {
   else if (gameType === 'numCombineCircle') renderNumCombineCircleQuestion();
   else renderCircleCombineQuestion();
   updateScoreUI();
+}
+
+function onNextQ() {
+  document.getElementById('next-q-btn').style.display = 'none';
+  nextQuestion();
 }
 
 // ===== Complete =====
@@ -1154,7 +1163,7 @@ function setupDragCombine(q, answer) {
           showFeedback('🎉'); speak('정답이에요!');
           if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
           updateScoreUI();
-          setTimeout(() => nextQuestion(), 900);
+          document.getElementById('next-q-btn').style.display='';
         } else {
           btn.classList.add('wrong'); btn.disabled = true;
           combo = 0;
@@ -1298,7 +1307,7 @@ function renderNumCombineQuestion() {
         showFeedback('🎉'); speak('정답이에요!');
         if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
         updateScoreUI();
-        setTimeout(() => nextQuestion(), 900);
+        document.getElementById('next-q-btn').style.display='';
       } else {
         btn.classList.add('wrong'); btn.disabled = true;
         topBox.classList.add('wrong-answer');
@@ -1370,7 +1379,7 @@ function renderNumCombineCircleQuestion() {
         showFeedback('🎉'); speak('정답이에요!');
         if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
         updateScoreUI();
-        setTimeout(() => nextQuestion(), 900);
+        document.getElementById('next-q-btn').style.display='';
       } else {
         btn.classList.add('wrong'); btn.disabled = true;
         topBox.classList.add('wrong-answer');
@@ -1436,7 +1445,7 @@ function renderCircleCombineQuestion() {
         showFeedback('🎉'); speak('정답이에요!');
         if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);
         updateScoreUI();
-        setTimeout(() => nextQuestion(), 900);
+        document.getElementById('next-q-btn').style.display='';
       } else {
         btn.classList.add('wrong'); btn.disabled = true;
         topBox.classList.add('wrong-answer');

@@ -296,10 +296,10 @@
   .drag-circle-box.orange-src { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .drag-circle-box.green-src { border-color: var(--app-green); background: #EDFAF4; }
   .drag-circle-box .cdot { width: 100% !important; height: auto !important; aspect-ratio: 1/1; cursor: grab; touch-action: none; user-select: none; transition: opacity 0.15s; justify-self: center; align-self: center; }
-  .drag-tray { width: 100%; height: 190px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(4, 1fr); gap: 8px; padding: 14px; align-content: center; justify-content: center; position: relative; }
+  .drag-tray { width: 100%; height: 180px; border: 2.5px dashed #6BADE8; border-radius: 20px; background: #EEF6FD; display: grid; grid-template-columns: repeat(5, 34px); grid-template-rows: repeat(4, 34px); gap: 6px; padding: 12px; align-content: center; justify-content: center; position: relative; }
   .drag-hint-txt { font-size: 1rem; color: #6BADE8; font-weight: 600; pointer-events: none; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .drag-arrow-wrap { width: 100%; padding: 2px 0; pointer-events: none; }
-  .tray-dot, .tray-slot { width: 100%; aspect-ratio: 1/1; height: auto; border-radius: 50%; }
+  .drag-arrow-wrap { width: 100%; display: flex; justify-content: space-around; padding: 2px 12%; pointer-events: none; }
+  .tray-dot, .tray-slot { width: 34px; height: 34px; border-radius: 50%; }
   .tray-dot { background: #6BADE8; animation: popIn 0.2s ease; }
   .tray-slot { background: transparent; }
   .tray-slot.blue { background: #6BADE8; animation: popIn 0.2s ease; }
@@ -372,7 +372,8 @@
     .circle-choice-btn .cdot { width: 18px; height: 18px; }
     .drag-circle-box { gap: 6px; padding: 10px; }
     .drag-sources-row { gap: 6px; }
-    .drag-tray { height: 160px; gap: 6px; padding: 10px; }
+    .drag-tray { height: 155px; grid-template-columns: repeat(5, 26px); grid-template-rows: repeat(4, 26px); gap: 5px; padding: 10px; }
+    .tray-dot, .tray-slot { width: 26px; height: 26px; }
     .game-container { padding: 16px 12px; border-radius: 16px; }
     .play-header { gap: 8px; }
     .login-logo-area .turtle-svg svg, .brand .turtle-svg svg { width: 90px; height: 75px; }
@@ -399,7 +400,8 @@
     .circle-choice-btn .cdot { width: 26px; height: 26px; }
     .drag-circle-box { gap: 10px; padding: 18px; }
     .drag-sources-row { gap: 12px; }
-    .drag-tray { height: 230px; gap: 10px; padding: 18px; }
+    .drag-tray { height: 220px; grid-template-columns: repeat(5, 42px); grid-template-rows: repeat(4, 42px); gap: 8px; padding: 16px; }
+    .tray-dot, .tray-slot { width: 42px; height: 42px; }
     .game-container { padding: 28px 24px; }
     .login-buttons { max-width: 360px; }
     .login-btn { padding: 16px 24px; font-size: 1rem; }
@@ -1098,10 +1100,13 @@ function renderDragCombineQuestion() {
         <div class="drag-circle-box green-src" data-count="${q.right}" data-color="green">${rightDotsHTML}</div>
       </div>
       <div class="drag-arrow-wrap">
-        <svg width="100%" height="28" viewBox="0 0 300 28" preserveAspectRatio="none" fill="none">
-          <line x1="75" y1="4" x2="150" y2="22" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="225" y1="4" x2="150" y2="22" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round"/>
-          <polyline points="140,14 150,23 160,14" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <svg width="44" height="26" viewBox="0 0 44 26" fill="none">
+          <line x1="4" y1="4" x2="40" y2="22" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round"/>
+          <polyline points="28,18 40,22 38,10" fill="none" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg width="44" height="26" viewBox="0 0 44 26" fill="none">
+          <line x1="40" y1="4" x2="4" y2="22" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round"/>
+          <polyline points="16,18 4,22 6,10" fill="none" stroke="#C8C0B4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="drag-tray" id="drag-tray">

@@ -236,7 +236,7 @@
 
   /* ===== Circle Combine Mode ===== */
   .circle-box {
-    width: 148px; height: 148px; border: 2.5px solid var(--warm-300); border-radius: 50%;
+    width: 148px; height: 148px; border: 2.5px solid var(--warm-300); border-radius: 20px;
     display: grid; grid-template-columns: repeat(3, 26px);
     gap: 6px; padding: 18px; background: #fff; position: relative;
     align-content: center; justify-content: center;
@@ -248,7 +248,6 @@
   .circle-box.correct-answer { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; border-style: solid; }
   .circle-box.wrong-answer { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
   .cdot { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
-  .cdot.rect { border-radius: 8px; }
   .cdot.orange { background: var(--app-orange); }
   .cdot.green { background: var(--app-green); }
   .cdot.blue { background: #7EC8E3; }
@@ -1327,7 +1326,7 @@ function renderNumCombineQuestion() {
 // ===== Mode 2: 동그라미→숫자 (numCombineCircle) =====
 function renderCircleDots(count, colorClass) {
   let d = '';
-  for (let i = 0; i < count; i++) d += `<div class="cdot rect ${colorClass}"></div>`;
+  for (let i = 0; i < count; i++) d += `<div class="cdot ${colorClass}"></div>`;
   return d;
 }
 

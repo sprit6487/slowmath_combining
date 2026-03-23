@@ -1199,7 +1199,7 @@ function setupDragCombine(q, answer) {
       ghost.remove(); ghost = null;
       if (over && !dot.dataset.dropped) {
         dot.dataset.dropped = '1';
-        dot.style.opacity = '0';
+        dot.style.opacity = '0.2';
         dot.style.pointerEvents = 'none';
         const hint = document.getElementById('drag-hint');
         if (hint) hint.remove();

@@ -1435,7 +1435,7 @@ function renderCircleCombineQuestion() {
       </div>
     </div>
     <div class="choices-grid" id="choices-grid">
-      ${choices.map(c => `<button class="circle-choice-btn" data-val="${c}"><div class="choice-dots-grid">${renderCircleDots(c, 'blue')}</div></button>`).join('')}
+      ${choices.map(c => `<button class="circle-choice-btn" data-val="${c}"><div class="choice-dots-grid">${renderCircleDots(Math.min(c, 18), 'blue')}</div></button>`).join('')}
     </div>
     <div class="impulse-msg" id="impulse-msg"></div>`;
 

@@ -241,7 +241,7 @@
     gap: 6px; padding: 12px; background: #fff; position: relative;
     align-content: center; justify-content: center;
   }
-  .circle-box.top { width: 148px; height: 148px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 18px; display: flex; align-items: center; justify-content: center; }
+  .circle-box.top { width: 148px; height: 148px; border-color: var(--app-blue); background: var(--app-blue-soft); padding: 18px; display: grid; grid-template-columns: repeat(3, 27px); align-content: center; justify-content: center; gap: 6px; }
   .circle-box.blank { border-style: dashed; border-color: var(--warm-300); background: var(--warm-50); }
   .circle-box.left-box { border-color: var(--app-orange); background: var(--app-orange-soft); }
   .circle-box.right-box { border-color: var(--app-green); background: #EDFAF4; }
@@ -275,7 +275,7 @@
     background: #fff; cursor: pointer; font-family: inherit; transition: all 0.1s;
     display: flex; align-items: center; justify-content: center; min-height: 56px;
   }
-  .choice-dots-grid { display: grid; grid-template-columns: repeat(5, auto); gap: 4px; justify-content: start; }
+  .choice-dots-grid { display: grid; grid-template-columns: repeat(3, auto); gap: 4px; justify-content: center; }
   .circle-choice-btn:active:not(:disabled) { transform: scale(0.95); }
   .circle-choice-btn.correct { border-color: var(--app-green); background: var(--app-green-light); animation: popIn 0.35s ease; }
   .circle-choice-btn.wrong { border-color: var(--app-red); background: var(--app-red-light); animation: shake 0.4s ease; }
@@ -1431,7 +1431,7 @@ function renderCircleCombineQuestion() {
       </div>
       <div class="tri-arrows">${combineArrowsSVG()}</div>
       <div class="tri-top-section">
-        <div class="circle-box top blank" id="circle-top"><span style="font-size:1.4rem;font-weight:700;color:var(--warm-400);">?</span></div>
+        <div class="circle-box top blank" id="circle-top"><span style="font-size:1.4rem;font-weight:700;color:var(--warm-400);grid-column:1/-1;text-align:center;">?</span></div>
       </div>
     </div>
     <div class="choices-grid" id="choices-grid">
@@ -1450,7 +1450,7 @@ function renderCircleCombineQuestion() {
       if (val === answer) {
         locked = true;
         btn.classList.add('correct');
-        topBox.innerHTML = `<div class="choice-dots-grid">${renderCircleDots(answer, 'blue')}</div>`;
+        topBox.innerHTML = renderCircleDots(answer, 'blue');
         topBox.classList.remove('blank');
         topBox.classList.add('correct-answer');
         combo++; correctCount++;

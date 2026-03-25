@@ -873,7 +873,7 @@ let impulseTimer = null;
 let isWrongNotesPractice = false;
 
 // ===== Login =====
-function doLogin(provider) { localStorage.setItem(LOGIN_KEY, provider); showView('start'); }
+function doLogin(provider) { localStorage.setItem(LOGIN_KEY, provider); const _sp=sessionStorage.getItem('_sp');if(_sp){sessionStorage.removeItem('_sp');startGame(...JSON.parse(_sp));return;} showView('start'); }
 function doLogout() { localStorage.removeItem(LOGIN_KEY); showView('login'); }
 function checkLogin() { showView(localStorage.getItem(LOGIN_KEY) ? 'start' : 'login'); }
 
@@ -1024,7 +1024,7 @@ function startWrongNotesPractice() {
 
 // ===== Start Game =====
 function startGame(type, mKey) {
-  if (!localStorage.getItem('slowmath_combining_login')) { showView('login'); return; }
+  if (!localStorage.getItem('slowmath_combining_login')) { sessionStorage.setItem('_sp',JSON.stringify([type,mKey])); showView('login'); return; }
     gameType = type; modeKey = mKey;
   isWrongNotesPractice = false;
   correctCount = 0; combo = 0; questionNum = 0;

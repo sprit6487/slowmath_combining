@@ -814,7 +814,7 @@
       </div>
     </div>
   </div>
-  <button class="logout-btn" onclick="doLogout()">로그아웃</button>
+  <button class="logout-btn" style="display:none" onclick="doLogout()">로그아웃</button>
 </div>
 
 <!-- ===== Wrong Notes View ===== -->
@@ -873,7 +873,7 @@ let impulseTimer = null;
 let isWrongNotesPractice = false;
 
 // ===== Login =====
-function doLogin(provider) { localStorage.setItem(LOGIN_KEY, provider); const _sp=sessionStorage.getItem('_sp');if(_sp){sessionStorage.removeItem('_sp');startGame(...JSON.parse(_sp));return;} showView('start'); }
+function doLogin(provider) { localStorage.setItem(LOGIN_KEY, provider); const _sp=sessionStorage.getItem('_sp');if(_sp){sessionStorage.removeItem('_sp');startGame(...JSON.parse(_sp));return;} document.querySelector('.logout-btn').style.display=''; showView('start'); }
 function doLogout() { localStorage.removeItem(LOGIN_KEY); showView('login'); }
 function checkLogin() { showView(localStorage.getItem(LOGIN_KEY) ? 'start' : 'login'); }
 
@@ -884,6 +884,7 @@ function showView(name) {
   const wnView = document.getElementById('wn-view');
   wnView.classList.toggle('active', name === 'wn');
   if (name === 'start') { renderSettingsUI(); updateWrongNotesBadge(); }
+  const lb=document.querySelector('.logout-btn');if(lb)lb.style.display=name==='start'&&localStorage.getItem('slowmath_combining_login')?'':'none';
 }
 
 // ===== Settings =====

@@ -976,6 +976,11 @@ function renderSettingsUI() {
 }
 
 // ===== TTS =====
+function korParticle(n, cons, vow) {
+  const d = n % 10;
+  return [2, 4, 5, 9].includes(d) ? vow : cons;
+}
+
 function speak(text) {
   if (!settings.tts || !window.speechSynthesis) return;
   window.speechSynthesis.cancel();
@@ -1389,7 +1394,7 @@ function renderNumCombineQuestion() {
     </div>
     <div class="impulse-msg" id="impulse-msg"></div>`;
 
-  speak(`${q.left} 더하기 ${q.right} 는 얼마일까요?`);
+  speak(`${q.left}${korParticle(q.left, '과', '와')} ${q.right}${korParticle(q.right, '을', '를')} 모으면 몇이 될까요?`);
   applyImpulse('.choice-btn');
 
   gc.querySelectorAll('.choice-btn').forEach(btn => {

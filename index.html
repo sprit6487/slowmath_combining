@@ -1545,6 +1545,9 @@ function renderCircleCombineQuestion() {
         btn.classList.add('correct');
         topBox.classList.remove('blank');
         topBox.classList.add('correct-answer');
+        if (answer <= 9) {
+          topBox.innerHTML = renderCircleDots(answer, 'blue');
+        }
         combo++; correctCount++;
         showFeedback('🎉'); speak('정답이에요!');
         if (isWrongNotesPractice) removeWrongNote(`${q.left}-${q.right}-${q.total}`);

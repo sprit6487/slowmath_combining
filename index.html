@@ -1547,6 +1547,8 @@ function renderCircleCombineQuestion() {
         topBox.classList.add('correct-answer');
         if (answer <= 9) {
           topBox.innerHTML = renderCircleDots(answer, 'blue');
+        } else {
+          topBox.innerHTML = `<span style="font-size:2rem;font-weight:800;color:var(--app-blue);grid-column:1/-1;text-align:center;">${answer}</span>`;
         }
         combo++; correctCount++;
         showFeedback('🎉'); speak('정답이에요!');

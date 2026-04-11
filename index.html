@@ -1616,7 +1616,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('sm-loggedin', !!localStorage.getItem(_SM_KEY));
   }
   _updateShareVis();
-  ['socialLogin','socialLogout','goLogin'].forEach(function(fn) {
+  ['socialLogin','socialLogout','goLogin','doLogin'].forEach(function(fn) {
     if (typeof window[fn] === 'function') {
       var _orig = window[fn];
       window[fn] = function() { _orig.apply(this, arguments); _updateShareVis(); };
